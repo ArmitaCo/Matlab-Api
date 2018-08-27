@@ -76,7 +76,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdentityModels.cs" />
+    <Compile Include="Model\ApplicationUser.cs" />
+    <Compile Include="MatlabDb.cs" />
     <Compile Include="Migrations\201808110936588_InitialCreate.cs" />
     <Compile Include="Migrations\201808110936588_InitialCreate.Designer.cs">
       <DependentUpon>201808110936588_InitialCreate.cs</DependentUpon>
@@ -84,7 +85,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Answer.cs" />
     <Compile Include="Model\Catergory.cs" />
-    <Compile Include="Model\ChoiceLable.cs" />
+    <Compile Include="Enum\ChoiceLable.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Favorite.cs" />
     <Compile Include="Model\ImageSuggest.cs" />

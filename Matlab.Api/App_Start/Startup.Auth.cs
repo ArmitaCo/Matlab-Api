@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -10,6 +14,11 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Matlab.Api.Providers;
 using Matlab.DataModel;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataHandler;
+using Microsoft.Owin.Security.DataHandler.Serializer;
+using Microsoft.Owin.Security.Infrastructure;
 
 namespace Matlab.Api
 {
@@ -38,9 +47,12 @@ namespace Matlab.Api
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 // In production mode set AllowInsecureHttp = false
-                AllowInsecureHttp = true
+                AllowInsecureHttp = true,
+                RefreshTokenProvider = new ApplicationRefreshTokenProvider()
+
+
             };
 
             // Enable the application to use bearer tokens to authenticate users
@@ -66,4 +78,26 @@ namespace Matlab.Api
             //});
         }
     }
+
+    public class ApplicationRefreshTokenProvider : AuthenticationTokenProvider
+    {
+        public override void Create(AuthenticationTokenCreateContext context)
+        {
+            var task = context.Request.ReadFormAsync();
+            task.Wait();
+            var form = task.Result ;
+            var grantType = form.Get("grant_type");
+            if (grantType== "password")
+            {
+                context.Ticket.Properties.ExpiresUtc = new DateTimeOffset(DateTime.Now.AddYears(1));
+                context.SetToken(context.SerializeTicket());
+            }
+        }
+
+        public override void Receive(AuthenticationTokenReceiveContext context)
+        {
+            context.DeserializeTicket(context.Token);
+        }
+    }
+
 }

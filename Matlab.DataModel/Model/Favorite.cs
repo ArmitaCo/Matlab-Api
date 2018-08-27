@@ -9,7 +9,7 @@ namespace Matlab.DataModel
         public string UserId { get; set; }
         public DateTime DateTime { get; set; }
         public int ArticleId { get; set; }
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual Article Article { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

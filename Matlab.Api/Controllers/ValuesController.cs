@@ -23,8 +23,9 @@ namespace Matlab.Api.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public string Post([FromBody]string value)
         {
+            return "hi";
         }
 
         // PUT api/values/5

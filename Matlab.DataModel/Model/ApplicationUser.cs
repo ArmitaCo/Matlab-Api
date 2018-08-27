@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -16,18 +17,9 @@ namespace Matlab.DataModel
             // Add custom user claims here
             return userIdentity;
         }
-    }
 
-    public partial class MatlabDb : IdentityDbContext<ApplicationUser>
-    {
-        public MatlabDb()
-            : base("name=MatlabDb", throwIfV1Schema: false)
-        {
-        }
-
-        public static MatlabDb Create()
-        {
-            return new MatlabDb();
-        }
+        public virtual ICollection<UserPackage> UserPackages { get; set; }
+        public virtual ICollection<Favorite> Favorites { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

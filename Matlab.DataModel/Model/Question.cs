@@ -9,9 +9,9 @@ namespace Matlab.DataModel
         public string AnswersString { get; set; }
         public int ArticleId { get; set; }
         public Article Article { get; set; }
-        public int CorrectAnswerId { get; set; }
+        //public int CorrectAnswerId { get; set; }
         public ChoiceLable CorrectChoiceLable { get; set; }
-        public virtual Answer CorrectAnswer { get; set; }
+        //public virtual Answer CorrectAnswer { get; set; }
         public virtual ICollection<Answer> Answers { get; set; }
 
     }

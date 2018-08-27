@@ -15,6 +15,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Matlab.Api.Providers;
 using Matlab.Api.Results;
+using Matlab.Api.Tools;
 using Matlab.DataModel;
 
 namespace Matlab.Api.Controllers
@@ -54,170 +55,227 @@ namespace Matlab.Api.Controllers
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
-        public UserInfoViewModel GetUserInfo()
+        public ResponseMessage GetUserInfo()
         {
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-            return new UserInfoViewModel
+            string ip = StaticTools.GetIp(Request);
+            try
             {
-                Email = User.Identity.GetUserName(),
-                HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
-            };
+                ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+                return Tools.ResponseMessage.OkWithResult(new UserInfoViewModel
+                {
+                    Email = User.Identity.GetUserName(),
+                    HasRegistered = externalLogin == null,
+                    LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                });
+            }
+            catch (Exception e)
+            {
+                return Tools.ResponseMessage.InternalError;
+            }
         }
 
         // POST api/Account/Logout
         [Route("Logout")]
-        public IHttpActionResult Logout()
+        public ResponseMessage Logout()
         {
-            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            return Ok();
+            string ip = StaticTools.GetIp(Request);
+            try
+            {
+                Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+                return Tools.ResponseMessage.Ok;
+            }
+            catch (Exception e)
+            {
+                return Tools.ResponseMessage.InternalError;
+            }
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
-        public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
+        public async Task<ResponseMessage> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-
-            if (user == null)
+            string ip = StaticTools.GetIp(Request);
+            try
             {
-                return null;
-            }
+                IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-            List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
-
-            foreach (IdentityUserLogin linkedAccount in user.Logins)
-            {
-                logins.Add(new UserLoginInfoViewModel
+                if (user == null)
                 {
-                    LoginProvider = linkedAccount.LoginProvider,
-                    ProviderKey = linkedAccount.ProviderKey
+                    return null;
+                }
+
+                List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
+
+                foreach (IdentityUserLogin linkedAccount in user.Logins)
+                {
+                    logins.Add(new UserLoginInfoViewModel
+                    {
+                        LoginProvider = linkedAccount.LoginProvider,
+                        ProviderKey = linkedAccount.ProviderKey
+                    });
+                }
+
+                if (user.PasswordHash != null)
+                {
+                    logins.Add(new UserLoginInfoViewModel
+                    {
+                        LoginProvider = LocalLoginProvider,
+                        ProviderKey = user.UserName,
+                    });
+                }
+
+                return Tools.ResponseMessage.OkWithResult(new ManageInfoViewModel
+                {
+                    LocalLoginProvider = LocalLoginProvider,
+                    Email = user.UserName,
+                    Logins = logins,
+                    ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
                 });
             }
-
-            if (user.PasswordHash != null)
+            catch (Exception e)
             {
-                logins.Add(new UserLoginInfoViewModel
-                {
-                    LoginProvider = LocalLoginProvider,
-                    ProviderKey = user.UserName,
-                });
+                return Tools.ResponseMessage.InternalError;
             }
-
-            return new ManageInfoViewModel
-            {
-                LocalLoginProvider = LocalLoginProvider,
-                Email = user.UserName,
-                Logins = logins,
-                ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
-            };
         }
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
-        public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
+        public async Task<ResponseMessage> ChangePassword(ChangePasswordBindingModel model)
         {
-            if (!ModelState.IsValid)
+            string ip = StaticTools.GetIp(Request);
+            try
             {
-                return BadRequest(ModelState);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, ModelState); 
+                }
 
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
-                model.NewPassword);
-            
-            if (!result.Succeeded)
+                IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+                    model.NewPassword);
+
+                if (!result.Succeeded)
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, result);
+                }
+
+                return Tools.ResponseMessage.Ok;
+            }
+            catch
             {
-                return GetErrorResult(result);
+                return Tools.ResponseMessage.InternalError;
             }
-
-            return Ok();
         }
 
         // POST api/Account/SetPassword
         [Route("SetPassword")]
-        public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
+        public async Task<ResponseMessage> SetPassword(SetPasswordBindingModel model)
         {
-            if (!ModelState.IsValid)
+            string ip = StaticTools.GetIp(Request);
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, ModelState); ;
+                }
+
+                IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+
+                if (!result.Succeeded)
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError,result);
+                }
+
+                return Tools.ResponseMessage.Ok;
             }
-
-            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-
-            if (!result.Succeeded)
+            catch
             {
-                return GetErrorResult(result);
+                return Tools.ResponseMessage.InternalError;
             }
-
-            return Ok();
         }
 
         // POST api/Account/AddExternalLogin
         [Route("AddExternalLogin")]
-        public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
+        public async Task<ResponseMessage> AddExternalLogin(AddExternalLoginBindingModel model)
         {
-            if (!ModelState.IsValid)
+            string ip = StaticTools.GetIp(Request);
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError,ModelState); ;
+                }
+
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
+                AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
+
+                if (ticket == null || ticket.Identity == null || (ticket.Properties != null
+                    && ticket.Properties.ExpiresUtc.HasValue
+                    && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed,"ورود خارجی ناموفق"); ;
+
+                }
+
+                ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
+
+                if (externalData == null)
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed,"The external login is already associated with an account.");
+                }
+
+                IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
+                    new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
+
+                if (!result.Succeeded)
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed,ErrorMessages.RegisterError, result);
+                }
+
+                return Tools.ResponseMessage.Ok;
             }
-
-            Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-
-            AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
-
-            if (ticket == null || ticket.Identity == null || (ticket.Properties != null
-                && ticket.Properties.ExpiresUtc.HasValue
-                && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
+            catch
             {
-                return BadRequest("External login failure.");
+                return Tools.ResponseMessage.InternalError;
             }
-
-            ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
-
-            if (externalData == null)
-            {
-                return BadRequest("The external login is already associated with an account.");
-            }
-
-            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
-                new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
         }
 
         // POST api/Account/RemoveLogin
         [Route("RemoveLogin")]
-        public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
+        public async Task<ResponseMessage> RemoveLogin(RemoveLoginBindingModel model)
         {
-            if (!ModelState.IsValid)
+            string ip = StaticTools.GetIp(Request);
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, ModelState); ;
+                }
+
+                IdentityResult result;
+
+                if (model.LoginProvider == LocalLoginProvider)
+                {
+                    result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
+                }
+                else
+                {
+                    result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
+                        new UserLoginInfo(model.LoginProvider, model.ProviderKey));
+                }
+
+                if (!result.Succeeded)
+                {
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError,result);
+                }
+
+                return Tools.ResponseMessage.Ok;
             }
-
-            IdentityResult result;
-
-            if (model.LoginProvider == LocalLoginProvider)
+            catch
             {
-                result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
+                return Tools.ResponseMessage.InternalError;
             }
-            else
-            {
-                result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
-                    new UserLoginInfo(model.LoginProvider, model.ProviderKey));
-            }
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
         }
 
         // GET api/Account/ExternalLogin
@@ -227,54 +285,62 @@ namespace Matlab.Api.Controllers
         [Route("ExternalLogin", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
-            if (error != null)
+            string ip = StaticTools.GetIp(Request);
+            try
             {
-                return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
-            }
+                if (error != null)
+                {
+                    return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
+                }
 
-            if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return new ChallengeResult(provider, this);
+                }
+
+                ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+                if (externalLogin == null)
+                {
+                    return InternalServerError();
+                }
+
+                if (externalLogin.LoginProvider != provider)
+                {
+                    Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                    return new ChallengeResult(provider, this);
+                }
+
+                ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+                    externalLogin.ProviderKey));
+
+                bool hasRegistered = user != null;
+
+                if (hasRegistered)
+                {
+                    Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
+                    ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                       OAuthDefaults.AuthenticationType);
+                    ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                        CookieAuthenticationDefaults.AuthenticationType);
+
+                    AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                    Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
+                }
+                else
+                {
+                    IEnumerable<Claim> claims = externalLogin.GetClaims();
+                    ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
+                    Authentication.SignIn(identity);
+                }
+
+                return Tools.ResponseMessage.Ok;
+            }
+            catch
             {
-                return new ChallengeResult(provider, this);
+                return Tools.ResponseMessage.InternalError;
             }
-
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-            if (externalLogin == null)
-            {
-                return InternalServerError();
-            }
-
-            if (externalLogin.LoginProvider != provider)
-            {
-                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                return new ChallengeResult(provider, this);
-            }
-
-            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
-                externalLogin.ProviderKey));
-
-            bool hasRegistered = user != null;
-
-            if (hasRegistered)
-            {
-                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    CookieAuthenticationDefaults.AuthenticationType);
-
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
-                Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
-            }
-            else
-            {
-                IEnumerable<Claim> claims = externalLogin.GetClaims();
-                ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
-                Authentication.SignIn(identity);
-            }
-
-            return Ok();
         }
 
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
@@ -325,7 +391,7 @@ namespace Matlab.Api.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, ModelState);
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
@@ -334,10 +400,10 @@ namespace Matlab.Api.Controllers
 
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed,ErrorMessages.RegisterError,result.Errors);
             }
 
-            return Ok();
+            return Tools.ResponseMessage.Ok;
         }
 
         // POST api/Account/RegisterExternal
@@ -368,7 +434,7 @@ namespace Matlab.Api.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }

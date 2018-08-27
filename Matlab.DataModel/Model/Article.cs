@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace Matlab.DataModel
         public int PackageId { get; set; }
         public virtual Package Package { get; set; }
         public virtual Question Question { get; set; }
+        public ICollection<Favorite> Favorites { get; set; }
+        public ICollection<ImageSuggest> ImageSuggests { get; set; }
 
     }
 }

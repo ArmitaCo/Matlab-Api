@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Matlab.DataModel
 {
@@ -10,6 +11,11 @@ namespace Matlab.DataModel
         public string ImageUrl { get; set; }
         public int CategoryId { get; set; }
         public virtual Catergory Catergory { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Article> Articles { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<UserPackage> UserPackages { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }
