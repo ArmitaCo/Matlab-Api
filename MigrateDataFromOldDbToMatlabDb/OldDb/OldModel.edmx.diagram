@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="95563977f41f470e911890310ec771d4" Name="Diagram1">
+        <EntityTypeShape EntityType="HealthMessageModel.accRole" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.accUser" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.accUserRole" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.errMessage" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.schScheduleJob" Width="1.5" PointX="2.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.schScheduleLog" Width="1.5" PointX="5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblAdvertising" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblClass" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblContent" Width="1.5" PointX="10.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblCustomer" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblCustomerAnswer" Width="1.5" PointX="15" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblCustomerService" Width="1.5" PointX="12.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblGroup" Width="1.5" PointX="8.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblMessage" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblMobileOperator" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblQuestion" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblQuestionOption" Width="1.5" PointX="9.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblServiceStatu" Width="1.5" PointX="10.5" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblStatu" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblTelegramContent" Width="1.5" PointX="15.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblTelegramCustomerService" Width="1.5" PointX="18" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblTest" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.tblZone" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.vwContent" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthMessageModel.vwCustomerScore" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="HealthMessageModel.FK_accUserRole_accRole" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_accUserRole_accUser" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_schScheduleLog_schScheduleJob" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblClass_tblGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblClass_tblStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblClass_tblZone" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblContent_tblClass" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerService_tblClass" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblContent_tblGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblContent_tblZone" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerService_tblContent" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblTelegramContent_tblContent" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomer_tblMobileOperator" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerAnswer_tblCustomer" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerService_tblCustomer" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblTelegramCustomerService_tblCustomer" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerAnswer_tblCustomerService" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerAnswer_tblQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerService_tblGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerService_tblQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerService_tblStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerService_tblTransferStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblCustomerService_tblZone" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblGroup_tblStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblGroup_tblZone" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblQuestion_tblTest" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblQuestionOption_tblQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblTelegramCustomerService_tblServiceStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblTelegramCustomerService_tblStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblTelegramCustomerService_tblStatus1" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblZone_tblStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblTelegramContent_tblZone" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblTelegramCustomerService_tblTelegramContent" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblTelegramCustomerService_tblZone" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthMessageModel.FK_tblTest_tblZone" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

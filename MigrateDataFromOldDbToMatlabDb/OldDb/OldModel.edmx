@@ -1,0 +1,2230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HealthMessageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="accUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="accUserRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="tinyint" Nullable="false" />
+          <Property Name="roleID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="errMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="logLevel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="exception" Type="nvarchar(max)" />
+          <Property Name="logDate" Type="datetime" Nullable="false" />
+          <Property Name="isWarned" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="schScheduleJob">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="scheduleTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="frequency" Type="int" Nullable="false" />
+          <Property Name="webServiceUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="parameter" Type="nvarchar" MaxLength="500" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="schScheduleLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jobID" Type="int" Nullable="false" />
+          <Property Name="runDate" Type="datetime" Nullable="false" />
+          <Property Name="startDate" Type="datetime" />
+          <Property Name="finishDate" Type="datetime" />
+          <Property Name="output" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblAdvertising">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+          <Property Name="message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="isMale" Type="bit" />
+          <Property Name="minAge" Type="tinyint" />
+          <Property Name="maxAge" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="tblClass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+          <Property Name="groupID" Type="smallint" Nullable="false" />
+          <Property Name="statusID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+          <Property Name="groupID" Type="smallint" Nullable="false" />
+          <Property Name="classID" Type="smallint" Nullable="false" />
+          <Property Name="context" Type="nvarchar" MaxLength="1000" />
+          <Property Name="question" Type="nvarchar" MaxLength="1000" />
+          <Property Name="optionCount" Type="tinyint" />
+          <Property Name="answer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="operatorID" Type="tinyint" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="createDate" Type="datetime" Nullable="false" />
+          <Property Name="updateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblCustomerAnswer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerServiceID" Type="int" Nullable="false" />
+          <Property Name="customerID" Type="int" Nullable="false" />
+          <Property Name="questionID" Type="int" />
+          <Property Name="contentQuestionID" Type="int" />
+          <Property Name="answer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="answerDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCustomerService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerID" Type="int" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+          <Property Name="groupID" Type="smallint" />
+          <Property Name="classID" Type="smallint" />
+          <Property Name="questionID" Type="int" />
+          <Property Name="contentID" Type="int" />
+          <Property Name="serviceStatusID" Type="tinyint" Nullable="false" />
+          <Property Name="sendSmsRequestID" Type="nvarchar" MaxLength="50" />
+          <Property Name="answerWait" Type="bit" Nullable="false" />
+          <Property Name="statusID" Type="tinyint" Nullable="false" />
+          <Property Name="createDate" Type="datetime" Nullable="false" />
+          <Property Name="updateDate" Type="datetime" Nullable="false" />
+          <Property Name="answerDate" Type="datetime" />
+          <Property Name="score" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+          <Property Name="statusID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="messageFa" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="messageEn" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblMobileOperator">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="testID" Type="smallint" Nullable="false" />
+          <Property Name="context" Type="nvarchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblQuestionOption">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="questionID" Type="int" Nullable="false" />
+          <Property Name="answerOption" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="score" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblServiceStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTelegramContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+          <Property Name="contentID" Type="int" />
+          <Property Name="context" Type="nvarchar" MaxLength="1000" />
+          <Property Name="media" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblTelegramCustomerService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerID" Type="int" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+          <Property Name="ticket" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telegramID" Type="nvarchar" MaxLength="30" />
+          <Property Name="telegramStatusID" Type="tinyint" />
+          <Property Name="telegramContentID" Type="smallint" />
+          <Property Name="serviceStatusID" Type="tinyint" />
+          <Property Name="statusID" Type="tinyint" Nullable="false" />
+          <Property Name="createDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblZone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="statusID" Type="tinyint" Nullable="false" />
+          <Property Name="correctScore" Type="tinyint" Nullable="false" />
+          <Property Name="wrongScore" Type="tinyint" Nullable="false" />
+          <Property Name="serviceNo" Type="int" Nullable="false" />
+          <Property Name="serviceID" Type="bigint" Nullable="false" />
+          <Property Name="freeServiceID" Type="bigint" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+          <Property Name="structureMessage" Type="nvarchar" MaxLength="1000" />
+          <Property Name="welcomeMessage" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HealthMessage.dbo.vwContent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwContent">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="code" />
+            <PropertyRef Name="zoneID" />
+            <PropertyRef Name="groupID" />
+            <PropertyRef Name="classID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+          <Property Name="groupID" Type="smallint" Nullable="false" />
+          <Property Name="classID" Type="smallint" Nullable="false" />
+          <Property Name="context" Type="nvarchar" MaxLength="1000" />
+          <Property Name="question" Type="nvarchar" MaxLength="1000" />
+          <Property Name="optionCount" Type="tinyint" />
+          <Property Name="answer" Type="nvarchar" MaxLength="50" />
+          <Property Name="rowNo" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HealthMessage.dbo.vwCustomerScore' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwCustomerScore">
+          <Key>
+            <PropertyRef Name="createDate" />
+            <PropertyRef Name="updateDate" />
+            <PropertyRef Name="score" />
+            <PropertyRef Name="zoneID" />
+          </Key>
+          <Property Name="status" Type="bit" />
+          <Property Name="rowNo" Type="bigint" />
+          <Property Name="createDate" Type="datetime" Nullable="false" />
+          <Property Name="updateDate" Type="datetime" Nullable="false" />
+          <Property Name="answerDate" Type="datetime" />
+          <Property Name="score" Type="int" Nullable="false" />
+          <Property Name="zoneID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_accUserRole_accRole">
+          <End Role="accRole" Type="Self.accRole" Multiplicity="1" />
+          <End Role="accUserRole" Type="Self.accUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accRole">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="accUserRole">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accUserRole_accUser">
+          <End Role="accUser" Type="Self.accUser" Multiplicity="1" />
+          <End Role="accUserRole" Type="Self.accUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="accUserRole">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_schScheduleLog_schScheduleJob">
+          <End Role="schScheduleJob" Type="Self.schScheduleJob" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="schScheduleLog" Type="Self.schScheduleLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schScheduleJob">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="schScheduleLog">
+              <PropertyRef Name="jobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblClass_tblGroup">
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="1" />
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblClass">
+              <PropertyRef Name="groupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblClass_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="1" />
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblClass">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblClass_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblClass">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContent_tblClass">
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClass">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblContent">
+              <PropertyRef Name="classID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContent_tblGroup">
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="1" />
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblContent">
+              <PropertyRef Name="groupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContent_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblContent">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomer_tblMobileOperator">
+          <End Role="tblMobileOperator" Type="Self.tblMobileOperator" Multiplicity="1" />
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMobileOperator">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomer">
+              <PropertyRef Name="operatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAnswer_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="1" />
+          <End Role="tblCustomerAnswer" Type="Self.tblCustomerAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerAnswer">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAnswer_tblCustomerService">
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="1" />
+          <End Role="tblCustomerAnswer" Type="Self.tblCustomerAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomerService">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerAnswer">
+              <PropertyRef Name="customerServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAnswer_tblQuestion">
+          <End Role="tblQuestion" Type="Self.tblQuestion" Multiplicity="0..1" />
+          <End Role="tblCustomerAnswer" Type="Self.tblCustomerAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerAnswer">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblClass">
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="0..1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClass">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="classID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblContent">
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="0..1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="contentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblGroup">
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="0..1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="groupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblQuestion">
+          <End Role="tblQuestion" Type="Self.tblQuestion" Multiplicity="0..1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblTransferStatus">
+          <End Role="tblServiceStatus" Type="Self.tblServiceStatus" Multiplicity="1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblServiceStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="serviceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGroup_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="1" />
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGroup">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGroup_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGroup">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuestion_tblTest">
+          <End Role="tblTest" Type="Self.tblTest" Multiplicity="1" />
+          <End Role="tblQuestion" Type="Self.tblQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTest">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblQuestion">
+              <PropertyRef Name="testID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuestionOption_tblQuestion">
+          <End Role="tblQuestion" Type="Self.tblQuestion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblQuestionOption" Type="Self.tblQuestionOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblQuestionOption">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramContent_tblContent">
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="0..1" />
+          <End Role="tblTelegramContent" Type="Self.tblTelegramContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramContent">
+              <PropertyRef Name="contentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramContent_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblTelegramContent" Type="Self.tblTelegramContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramContent">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblServiceStatus">
+          <End Role="tblServiceStatus" Type="Self.tblServiceStatus" Multiplicity="0..1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblServiceStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="serviceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblStatus1">
+          <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="0..1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="telegramStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblTelegramContent">
+          <End Role="tblTelegramContent" Type="Self.tblTelegramContent" Multiplicity="0..1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTelegramContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="telegramContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTest_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblTest" Type="Self.tblTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTest">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblZone_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="1" />
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblZone">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthMessageModelStoreContainer">
+          <EntitySet Name="accRole" EntityType="Self.accRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="accUser" EntityType="Self.accUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="accUserRole" EntityType="Self.accUserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="errMessage" EntityType="Self.errMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="schScheduleJob" EntityType="Self.schScheduleJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="schScheduleLog" EntityType="Self.schScheduleLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAdvertising" EntityType="Self.tblAdvertising" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblClass" EntityType="Self.tblClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContent" EntityType="Self.tblContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustomer" EntityType="Self.tblCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustomerAnswer" EntityType="Self.tblCustomerAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustomerService" EntityType="Self.tblCustomerService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGroup" EntityType="Self.tblGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMessage" EntityType="Self.tblMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMobileOperator" EntityType="Self.tblMobileOperator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuestion" EntityType="Self.tblQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuestionOption" EntityType="Self.tblQuestionOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblServiceStatus" EntityType="Self.tblServiceStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStatus" EntityType="Self.tblStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTelegramContent" EntityType="Self.tblTelegramContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTelegramCustomerService" EntityType="Self.tblTelegramCustomerService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTest" EntityType="Self.tblTest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblZone" EntityType="Self.tblZone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwContent" EntityType="Self.vwContent" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwContent].[ID] AS [ID], 
+    [vwContent].[code] AS [code], 
+    [vwContent].[zoneID] AS [zoneID], 
+    [vwContent].[groupID] AS [groupID], 
+    [vwContent].[classID] AS [classID], 
+    [vwContent].[context] AS [context], 
+    [vwContent].[question] AS [question], 
+    [vwContent].[optionCount] AS [optionCount], 
+    [vwContent].[answer] AS [answer], 
+    [vwContent].[rowNo] AS [rowNo]
+    FROM [dbo].[vwContent] AS [vwContent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwCustomerScore" EntityType="Self.vwCustomerScore" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwCustomerScore].[status] AS [status], 
+    [vwCustomerScore].[rowNo] AS [rowNo], 
+    [vwCustomerScore].[createDate] AS [createDate], 
+    [vwCustomerScore].[updateDate] AS [updateDate], 
+    [vwCustomerScore].[answerDate] AS [answerDate], 
+    [vwCustomerScore].[score] AS [score], 
+    [vwCustomerScore].[zoneID] AS [zoneID]
+    FROM [dbo].[vwCustomerScore] AS [vwCustomerScore]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_accUserRole_accRole" Association="Self.FK_accUserRole_accRole">
+            <End Role="accRole" EntitySet="accRole" />
+            <End Role="accUserRole" EntitySet="accUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accUserRole_accUser" Association="Self.FK_accUserRole_accUser">
+            <End Role="accUser" EntitySet="accUser" />
+            <End Role="accUserRole" EntitySet="accUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_schScheduleLog_schScheduleJob" Association="Self.FK_schScheduleLog_schScheduleJob">
+            <End Role="schScheduleJob" EntitySet="schScheduleJob" />
+            <End Role="schScheduleLog" EntitySet="schScheduleLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblClass_tblGroup" Association="Self.FK_tblClass_tblGroup">
+            <End Role="tblGroup" EntitySet="tblGroup" />
+            <End Role="tblClass" EntitySet="tblClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblClass_tblStatus" Association="Self.FK_tblClass_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblClass" EntitySet="tblClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblClass_tblZone" Association="Self.FK_tblClass_tblZone">
+            <End Role="tblZone" EntitySet="tblZone" />
+            <End Role="tblClass" EntitySet="tblClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContent_tblClass" Association="Self.FK_tblContent_tblClass">
+            <End Role="tblClass" EntitySet="tblClass" />
+            <End Role="tblContent" EntitySet="tblContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContent_tblGroup" Association="Self.FK_tblContent_tblGroup">
+            <End Role="tblGroup" EntitySet="tblGroup" />
+            <End Role="tblContent" EntitySet="tblContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContent_tblZone" Association="Self.FK_tblContent_tblZone">
+            <End Role="tblZone" EntitySet="tblZone" />
+            <End Role="tblContent" EntitySet="tblContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomer_tblMobileOperator" Association="Self.FK_tblCustomer_tblMobileOperator">
+            <End Role="tblMobileOperator" EntitySet="tblMobileOperator" />
+            <End Role="tblCustomer" EntitySet="tblCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAnswer_tblCustomer" Association="Self.FK_tblCustomerAnswer_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomer" />
+            <End Role="tblCustomerAnswer" EntitySet="tblCustomerAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAnswer_tblCustomerService" Association="Self.FK_tblCustomerAnswer_tblCustomerService">
+            <End Role="tblCustomerService" EntitySet="tblCustomerService" />
+            <End Role="tblCustomerAnswer" EntitySet="tblCustomerAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAnswer_tblQuestion" Association="Self.FK_tblCustomerAnswer_tblQuestion">
+            <End Role="tblQuestion" EntitySet="tblQuestion" />
+            <End Role="tblCustomerAnswer" EntitySet="tblCustomerAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblClass" Association="Self.FK_tblCustomerService_tblClass">
+            <End Role="tblClass" EntitySet="tblClass" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblContent" Association="Self.FK_tblCustomerService_tblContent">
+            <End Role="tblContent" EntitySet="tblContent" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblCustomer" Association="Self.FK_tblCustomerService_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomer" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblGroup" Association="Self.FK_tblCustomerService_tblGroup">
+            <End Role="tblGroup" EntitySet="tblGroup" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblQuestion" Association="Self.FK_tblCustomerService_tblQuestion">
+            <End Role="tblQuestion" EntitySet="tblQuestion" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblStatus" Association="Self.FK_tblCustomerService_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblTransferStatus" Association="Self.FK_tblCustomerService_tblTransferStatus">
+            <End Role="tblServiceStatus" EntitySet="tblServiceStatus" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblZone" Association="Self.FK_tblCustomerService_tblZone">
+            <End Role="tblZone" EntitySet="tblZone" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGroup_tblStatus" Association="Self.FK_tblGroup_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblGroup" EntitySet="tblGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGroup_tblZone" Association="Self.FK_tblGroup_tblZone">
+            <End Role="tblZone" EntitySet="tblZone" />
+            <End Role="tblGroup" EntitySet="tblGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuestion_tblTest" Association="Self.FK_tblQuestion_tblTest">
+            <End Role="tblTest" EntitySet="tblTest" />
+            <End Role="tblQuestion" EntitySet="tblQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuestionOption_tblQuestion" Association="Self.FK_tblQuestionOption_tblQuestion">
+            <End Role="tblQuestion" EntitySet="tblQuestion" />
+            <End Role="tblQuestionOption" EntitySet="tblQuestionOption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramContent_tblContent" Association="Self.FK_tblTelegramContent_tblContent">
+            <End Role="tblContent" EntitySet="tblContent" />
+            <End Role="tblTelegramContent" EntitySet="tblTelegramContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramContent_tblZone" Association="Self.FK_tblTelegramContent_tblZone">
+            <End Role="tblZone" EntitySet="tblZone" />
+            <End Role="tblTelegramContent" EntitySet="tblTelegramContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblCustomer" Association="Self.FK_tblTelegramCustomerService_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomer" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblServiceStatus" Association="Self.FK_tblTelegramCustomerService_tblServiceStatus">
+            <End Role="tblServiceStatus" EntitySet="tblServiceStatus" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblStatus" Association="Self.FK_tblTelegramCustomerService_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblStatus1" Association="Self.FK_tblTelegramCustomerService_tblStatus1">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblTelegramContent" Association="Self.FK_tblTelegramCustomerService_tblTelegramContent">
+            <End Role="tblTelegramContent" EntitySet="tblTelegramContent" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblZone" Association="Self.FK_tblTelegramCustomerService_tblZone">
+            <End Role="tblZone" EntitySet="tblZone" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTest_tblZone" Association="Self.FK_tblTest_tblZone">
+            <End Role="tblZone" EntitySet="tblZone" />
+            <End Role="tblTest" EntitySet="tblTest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblZone_tblStatus" Association="Self.FK_tblZone_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblZone" EntitySet="tblZone" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthMessageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="accRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="accUserRoles" Relationship="Self.FK_accUserRole_accRole" FromRole="accRole" ToRole="accUserRole" />
+        </EntityType>
+        <EntityType Name="accUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="accUserRoles" Relationship="Self.FK_accUserRole_accUser" FromRole="accUser" ToRole="accUserRole" />
+        </EntityType>
+        <EntityType Name="accUserRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Byte" Nullable="false" />
+          <Property Name="roleID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="accRole" Relationship="Self.FK_accUserRole_accRole" FromRole="accUserRole" ToRole="accRole" />
+          <NavigationProperty Name="accUser" Relationship="Self.FK_accUserRole_accUser" FromRole="accUserRole" ToRole="accUser" />
+        </EntityType>
+        <EntityType Name="errMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="logLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="logDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isWarned" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="schScheduleJob">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="scheduleTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="frequency" Type="Int32" Nullable="false" />
+          <Property Name="webServiceUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="parameter" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="schScheduleLogs" Relationship="Self.FK_schScheduleLog_schScheduleJob" FromRole="schScheduleJob" ToRole="schScheduleLog" />
+        </EntityType>
+        <EntityType Name="schScheduleLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jobID" Type="Int32" Nullable="false" />
+          <Property Name="runDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="startDate" Type="DateTime" Precision="3" />
+          <Property Name="finishDate" Type="DateTime" Precision="3" />
+          <Property Name="output" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="schScheduleJob" Relationship="Self.FK_schScheduleLog_schScheduleJob" FromRole="schScheduleLog" ToRole="schScheduleJob" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblAdvertising">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isMale" Type="Boolean" />
+          <Property Name="minAge" Type="Byte" />
+          <Property Name="maxAge" Type="Byte" />
+        </EntityType>
+        <EntityType Name="tblClass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+          <Property Name="groupID" Type="Int16" Nullable="false" />
+          <Property Name="statusID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="tblGroup" Relationship="Self.FK_tblClass_tblGroup" FromRole="tblClass" ToRole="tblGroup" />
+          <NavigationProperty Name="tblStatu" Relationship="Self.FK_tblClass_tblStatus" FromRole="tblClass" ToRole="tblStatus" />
+          <NavigationProperty Name="tblZone" Relationship="Self.FK_tblClass_tblZone" FromRole="tblClass" ToRole="tblZone" />
+          <NavigationProperty Name="tblContents" Relationship="Self.FK_tblContent_tblClass" FromRole="tblClass" ToRole="tblContent" />
+          <NavigationProperty Name="tblCustomerServices" Relationship="Self.FK_tblCustomerService_tblClass" FromRole="tblClass" ToRole="tblCustomerService" />
+        </EntityType>
+        <EntityType Name="tblContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+          <Property Name="groupID" Type="Int16" Nullable="false" />
+          <Property Name="classID" Type="Int16" Nullable="false" />
+          <Property Name="context" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="question" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="optionCount" Type="Byte" />
+          <Property Name="answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblClass" Relationship="Self.FK_tblContent_tblClass" FromRole="tblContent" ToRole="tblClass" />
+          <NavigationProperty Name="tblGroup" Relationship="Self.FK_tblContent_tblGroup" FromRole="tblContent" ToRole="tblGroup" />
+          <NavigationProperty Name="tblZone" Relationship="Self.FK_tblContent_tblZone" FromRole="tblContent" ToRole="tblZone" />
+          <NavigationProperty Name="tblCustomerServices" Relationship="Self.FK_tblCustomerService_tblContent" FromRole="tblContent" ToRole="tblCustomerService" />
+          <NavigationProperty Name="tblTelegramContents" Relationship="Self.FK_tblTelegramContent_tblContent" FromRole="tblContent" ToRole="tblTelegramContent" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="operatorID" Type="Byte" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblMobileOperator" Relationship="Self.FK_tblCustomer_tblMobileOperator" FromRole="tblCustomer" ToRole="tblMobileOperator" />
+          <NavigationProperty Name="tblCustomerAnswers" Relationship="Self.FK_tblCustomerAnswer_tblCustomer" FromRole="tblCustomer" ToRole="tblCustomerAnswer" />
+          <NavigationProperty Name="tblCustomerServices" Relationship="Self.FK_tblCustomerService_tblCustomer" FromRole="tblCustomer" ToRole="tblCustomerService" />
+          <NavigationProperty Name="tblTelegramCustomerServices" Relationship="Self.FK_tblTelegramCustomerService_tblCustomer" FromRole="tblCustomer" ToRole="tblTelegramCustomerService" />
+        </EntityType>
+        <EntityType Name="tblCustomerAnswer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerServiceID" Type="Int32" Nullable="false" />
+          <Property Name="customerID" Type="Int32" Nullable="false" />
+          <Property Name="questionID" Type="Int32" />
+          <Property Name="contentQuestionID" Type="Int32" />
+          <Property Name="answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="answerDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblCustomer" Relationship="Self.FK_tblCustomerAnswer_tblCustomer" FromRole="tblCustomerAnswer" ToRole="tblCustomer" />
+          <NavigationProperty Name="tblCustomerService" Relationship="Self.FK_tblCustomerAnswer_tblCustomerService" FromRole="tblCustomerAnswer" ToRole="tblCustomerService" />
+          <NavigationProperty Name="tblQuestion" Relationship="Self.FK_tblCustomerAnswer_tblQuestion" FromRole="tblCustomerAnswer" ToRole="tblQuestion" />
+        </EntityType>
+        <EntityType Name="tblCustomerService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerID" Type="Int32" Nullable="false" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+          <Property Name="groupID" Type="Int16" />
+          <Property Name="classID" Type="Int16" />
+          <Property Name="questionID" Type="Int32" />
+          <Property Name="contentID" Type="Int32" />
+          <Property Name="serviceStatusID" Type="Byte" Nullable="false" />
+          <Property Name="sendSmsRequestID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="answerWait" Type="Boolean" Nullable="false" />
+          <Property Name="statusID" Type="Byte" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="answerDate" Type="DateTime" Precision="3" />
+          <Property Name="score" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblClass" Relationship="Self.FK_tblCustomerService_tblClass" FromRole="tblCustomerService" ToRole="tblClass" />
+          <NavigationProperty Name="tblContent" Relationship="Self.FK_tblCustomerService_tblContent" FromRole="tblCustomerService" ToRole="tblContent" />
+          <NavigationProperty Name="tblCustomer" Relationship="Self.FK_tblCustomerService_tblCustomer" FromRole="tblCustomerService" ToRole="tblCustomer" />
+          <NavigationProperty Name="tblCustomerAnswers" Relationship="Self.FK_tblCustomerAnswer_tblCustomerService" FromRole="tblCustomerService" ToRole="tblCustomerAnswer" />
+          <NavigationProperty Name="tblGroup" Relationship="Self.FK_tblCustomerService_tblGroup" FromRole="tblCustomerService" ToRole="tblGroup" />
+          <NavigationProperty Name="tblQuestion" Relationship="Self.FK_tblCustomerService_tblQuestion" FromRole="tblCustomerService" ToRole="tblQuestion" />
+          <NavigationProperty Name="tblStatu" Relationship="Self.FK_tblCustomerService_tblStatus" FromRole="tblCustomerService" ToRole="tblStatus" />
+          <NavigationProperty Name="tblServiceStatu" Relationship="Self.FK_tblCustomerService_tblTransferStatus" FromRole="tblCustomerService" ToRole="tblServiceStatus" />
+          <NavigationProperty Name="tblZone" Relationship="Self.FK_tblCustomerService_tblZone" FromRole="tblCustomerService" ToRole="tblZone" />
+        </EntityType>
+        <EntityType Name="tblGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+          <Property Name="statusID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="tblClasses" Relationship="Self.FK_tblClass_tblGroup" FromRole="tblGroup" ToRole="tblClass" />
+          <NavigationProperty Name="tblContents" Relationship="Self.FK_tblContent_tblGroup" FromRole="tblGroup" ToRole="tblContent" />
+          <NavigationProperty Name="tblCustomerServices" Relationship="Self.FK_tblCustomerService_tblGroup" FromRole="tblGroup" ToRole="tblCustomerService" />
+          <NavigationProperty Name="tblStatu" Relationship="Self.FK_tblGroup_tblStatus" FromRole="tblGroup" ToRole="tblStatus" />
+          <NavigationProperty Name="tblZone" Relationship="Self.FK_tblGroup_tblZone" FromRole="tblGroup" ToRole="tblZone" />
+        </EntityType>
+        <EntityType Name="tblMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="messageFa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="messageEn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblMobileOperator">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblCustomers" Relationship="Self.FK_tblCustomer_tblMobileOperator" FromRole="tblMobileOperator" ToRole="tblCustomer" />
+        </EntityType>
+        <EntityType Name="tblQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="testID" Type="Int16" Nullable="false" />
+          <Property Name="context" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblCustomerAnswers" Relationship="Self.FK_tblCustomerAnswer_tblQuestion" FromRole="tblQuestion" ToRole="tblCustomerAnswer" />
+          <NavigationProperty Name="tblCustomerServices" Relationship="Self.FK_tblCustomerService_tblQuestion" FromRole="tblQuestion" ToRole="tblCustomerService" />
+          <NavigationProperty Name="tblTest" Relationship="Self.FK_tblQuestion_tblTest" FromRole="tblQuestion" ToRole="tblTest" />
+          <NavigationProperty Name="tblQuestionOptions" Relationship="Self.FK_tblQuestionOption_tblQuestion" FromRole="tblQuestion" ToRole="tblQuestionOption" />
+        </EntityType>
+        <EntityType Name="tblQuestionOption">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="questionID" Type="Int32" Nullable="false" />
+          <Property Name="answerOption" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="score" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="tblQuestion" Relationship="Self.FK_tblQuestionOption_tblQuestion" FromRole="tblQuestionOption" ToRole="tblQuestion" />
+        </EntityType>
+        <EntityType Name="tblServiceStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblCustomerServices" Relationship="Self.FK_tblCustomerService_tblTransferStatus" FromRole="tblServiceStatus" ToRole="tblCustomerService" />
+          <NavigationProperty Name="tblTelegramCustomerServices" Relationship="Self.FK_tblTelegramCustomerService_tblServiceStatus" FromRole="tblServiceStatus" ToRole="tblTelegramCustomerService" />
+        </EntityType>
+        <EntityType Name="tblStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblClasses" Relationship="Self.FK_tblClass_tblStatus" FromRole="tblStatus" ToRole="tblClass" />
+          <NavigationProperty Name="tblCustomerServices" Relationship="Self.FK_tblCustomerService_tblStatus" FromRole="tblStatus" ToRole="tblCustomerService" />
+          <NavigationProperty Name="tblGroups" Relationship="Self.FK_tblGroup_tblStatus" FromRole="tblStatus" ToRole="tblGroup" />
+          <NavigationProperty Name="tblTelegramCustomerServices" Relationship="Self.FK_tblTelegramCustomerService_tblStatus" FromRole="tblStatus" ToRole="tblTelegramCustomerService" />
+          <NavigationProperty Name="tblTelegramCustomerServices1" Relationship="Self.FK_tblTelegramCustomerService_tblStatus1" FromRole="tblStatus" ToRole="tblTelegramCustomerService" />
+          <NavigationProperty Name="tblZones" Relationship="Self.FK_tblZone_tblStatus" FromRole="tblStatus" ToRole="tblZone" />
+        </EntityType>
+        <EntityType Name="tblTelegramContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uID" Type="Guid" Nullable="false" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+          <Property Name="contentID" Type="Int32" />
+          <Property Name="context" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="media" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="tblContent" Relationship="Self.FK_tblTelegramContent_tblContent" FromRole="tblTelegramContent" ToRole="tblContent" />
+          <NavigationProperty Name="tblZone" Relationship="Self.FK_tblTelegramContent_tblZone" FromRole="tblTelegramContent" ToRole="tblZone" />
+          <NavigationProperty Name="tblTelegramCustomerServices" Relationship="Self.FK_tblTelegramCustomerService_tblTelegramContent" FromRole="tblTelegramContent" ToRole="tblTelegramCustomerService" />
+        </EntityType>
+        <EntityType Name="tblTelegramCustomerService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerID" Type="Int32" Nullable="false" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+          <Property Name="ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telegramID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="telegramStatusID" Type="Byte" />
+          <Property Name="telegramContentID" Type="Int16" />
+          <Property Name="serviceStatusID" Type="Byte" />
+          <Property Name="statusID" Type="Byte" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblCustomer" Relationship="Self.FK_tblTelegramCustomerService_tblCustomer" FromRole="tblTelegramCustomerService" ToRole="tblCustomer" />
+          <NavigationProperty Name="tblServiceStatu" Relationship="Self.FK_tblTelegramCustomerService_tblServiceStatus" FromRole="tblTelegramCustomerService" ToRole="tblServiceStatus" />
+          <NavigationProperty Name="tblStatu" Relationship="Self.FK_tblTelegramCustomerService_tblStatus" FromRole="tblTelegramCustomerService" ToRole="tblStatus" />
+          <NavigationProperty Name="tblStatu1" Relationship="Self.FK_tblTelegramCustomerService_tblStatus1" FromRole="tblTelegramCustomerService" ToRole="tblStatus" />
+          <NavigationProperty Name="tblTelegramContent" Relationship="Self.FK_tblTelegramCustomerService_tblTelegramContent" FromRole="tblTelegramCustomerService" ToRole="tblTelegramContent" />
+          <NavigationProperty Name="tblZone" Relationship="Self.FK_tblTelegramCustomerService_tblZone" FromRole="tblTelegramCustomerService" ToRole="tblZone" />
+        </EntityType>
+        <EntityType Name="tblTest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="tblQuestions" Relationship="Self.FK_tblQuestion_tblTest" FromRole="tblTest" ToRole="tblQuestion" />
+          <NavigationProperty Name="tblZone" Relationship="Self.FK_tblTest_tblZone" FromRole="tblTest" ToRole="tblZone" />
+        </EntityType>
+        <EntityType Name="tblZone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="statusID" Type="Byte" Nullable="false" />
+          <Property Name="correctScore" Type="Byte" Nullable="false" />
+          <Property Name="wrongScore" Type="Byte" Nullable="false" />
+          <Property Name="serviceNo" Type="Int32" Nullable="false" />
+          <Property Name="serviceID" Type="Int64" Nullable="false" />
+          <Property Name="freeServiceID" Type="Int64" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <Property Name="structureMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="welcomeMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblClasses" Relationship="Self.FK_tblClass_tblZone" FromRole="tblZone" ToRole="tblClass" />
+          <NavigationProperty Name="tblContents" Relationship="Self.FK_tblContent_tblZone" FromRole="tblZone" ToRole="tblContent" />
+          <NavigationProperty Name="tblCustomerServices" Relationship="Self.FK_tblCustomerService_tblZone" FromRole="tblZone" ToRole="tblCustomerService" />
+          <NavigationProperty Name="tblGroups" Relationship="Self.FK_tblGroup_tblZone" FromRole="tblZone" ToRole="tblGroup" />
+          <NavigationProperty Name="tblStatu" Relationship="Self.FK_tblZone_tblStatus" FromRole="tblZone" ToRole="tblStatus" />
+          <NavigationProperty Name="tblTelegramContents" Relationship="Self.FK_tblTelegramContent_tblZone" FromRole="tblZone" ToRole="tblTelegramContent" />
+          <NavigationProperty Name="tblTelegramCustomerServices" Relationship="Self.FK_tblTelegramCustomerService_tblZone" FromRole="tblZone" ToRole="tblTelegramCustomerService" />
+          <NavigationProperty Name="tblTests" Relationship="Self.FK_tblTest_tblZone" FromRole="tblZone" ToRole="tblTest" />
+        </EntityType>
+        <EntityType Name="vwContent">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="code" />
+            <PropertyRef Name="zoneID" />
+            <PropertyRef Name="groupID" />
+            <PropertyRef Name="classID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+          <Property Name="groupID" Type="Int16" Nullable="false" />
+          <Property Name="classID" Type="Int16" Nullable="false" />
+          <Property Name="context" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="question" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="optionCount" Type="Byte" />
+          <Property Name="answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rowNo" Type="Int64" />
+        </EntityType>
+        <EntityType Name="vwCustomerScore">
+          <Key>
+            <PropertyRef Name="createDate" />
+            <PropertyRef Name="updateDate" />
+            <PropertyRef Name="score" />
+            <PropertyRef Name="zoneID" />
+          </Key>
+          <Property Name="status" Type="Boolean" />
+          <Property Name="rowNo" Type="Int64" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="answerDate" Type="DateTime" Precision="3" />
+          <Property Name="score" Type="Int32" Nullable="false" />
+          <Property Name="zoneID" Type="Byte" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_accUserRole_accRole">
+          <End Role="accRole" Type="Self.accRole" Multiplicity="1" />
+          <End Role="accUserRole" Type="Self.accUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accRole">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="accUserRole">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accUserRole_accUser">
+          <End Role="accUser" Type="Self.accUser" Multiplicity="1" />
+          <End Role="accUserRole" Type="Self.accUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="accUserRole">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_schScheduleLog_schScheduleJob">
+          <End Role="schScheduleJob" Type="Self.schScheduleJob" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="schScheduleLog" Type="Self.schScheduleLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schScheduleJob">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="schScheduleLog">
+              <PropertyRef Name="jobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblClass_tblGroup">
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="1" />
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblClass">
+              <PropertyRef Name="groupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblClass_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatu" Multiplicity="1" />
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblClass">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblClass_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblClass">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContent_tblClass">
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClass">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblContent">
+              <PropertyRef Name="classID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblClass">
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="0..1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClass">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="classID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContent_tblGroup">
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="1" />
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblContent">
+              <PropertyRef Name="groupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblContent_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblContent">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblContent">
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="0..1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="contentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramContent_tblContent">
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="0..1" />
+          <End Role="tblTelegramContent" Type="Self.tblTelegramContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramContent">
+              <PropertyRef Name="contentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomer_tblMobileOperator">
+          <End Role="tblMobileOperator" Type="Self.tblMobileOperator" Multiplicity="1" />
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMobileOperator">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomer">
+              <PropertyRef Name="operatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAnswer_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="1" />
+          <End Role="tblCustomerAnswer" Type="Self.tblCustomerAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerAnswer">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAnswer_tblCustomerService">
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="1" />
+          <End Role="tblCustomerAnswer" Type="Self.tblCustomerAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomerService">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerAnswer">
+              <PropertyRef Name="customerServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAnswer_tblQuestion">
+          <End Role="tblQuestion" Type="Self.tblQuestion" Multiplicity="0..1" />
+          <End Role="tblCustomerAnswer" Type="Self.tblCustomerAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerAnswer">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblGroup">
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="0..1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="groupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblQuestion">
+          <End Role="tblQuestion" Type="Self.tblQuestion" Multiplicity="0..1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatu" Multiplicity="1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblTransferStatus">
+          <End Role="tblServiceStatus" Type="Self.tblServiceStatu" Multiplicity="1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblServiceStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="serviceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerService_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblCustomerService" Type="Self.tblCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCustomerService">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGroup_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatu" Multiplicity="1" />
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGroup">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGroup_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblGroup" Type="Self.tblGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGroup">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuestion_tblTest">
+          <End Role="tblTest" Type="Self.tblTest" Multiplicity="1" />
+          <End Role="tblQuestion" Type="Self.tblQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTest">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblQuestion">
+              <PropertyRef Name="testID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQuestionOption_tblQuestion">
+          <End Role="tblQuestion" Type="Self.tblQuestion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblQuestionOption" Type="Self.tblQuestionOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblQuestionOption">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblServiceStatus">
+          <End Role="tblServiceStatus" Type="Self.tblServiceStatu" Multiplicity="0..1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblServiceStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="serviceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatu" Multiplicity="1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblStatus1">
+          <End Role="tblStatus" Type="Self.tblStatu" Multiplicity="0..1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="telegramStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblZone_tblStatus">
+          <End Role="tblStatus" Type="Self.tblStatu" Multiplicity="1" />
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblZone">
+              <PropertyRef Name="statusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramContent_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblTelegramContent" Type="Self.tblTelegramContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramContent">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblTelegramContent">
+          <End Role="tblTelegramContent" Type="Self.tblTelegramContent" Multiplicity="0..1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTelegramContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="telegramContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTelegramCustomerService_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblTelegramCustomerService" Type="Self.tblTelegramCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTelegramCustomerService">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTest_tblZone">
+          <End Role="tblZone" Type="Self.tblZone" Multiplicity="1" />
+          <End Role="tblTest" Type="Self.tblTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblZone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTest">
+              <PropertyRef Name="zoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthMessageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accRoles" EntityType="Self.accRole" />
+          <EntitySet Name="accUsers" EntityType="Self.accUser" />
+          <EntitySet Name="accUserRoles" EntityType="Self.accUserRole" />
+          <EntitySet Name="errMessages" EntityType="Self.errMessage" />
+          <EntitySet Name="schScheduleJobs" EntityType="Self.schScheduleJob" />
+          <EntitySet Name="schScheduleLogs" EntityType="Self.schScheduleLog" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tblAdvertisings" EntityType="Self.tblAdvertising" />
+          <EntitySet Name="tblClasses" EntityType="Self.tblClass" />
+          <EntitySet Name="tblContents" EntityType="Self.tblContent" />
+          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
+          <EntitySet Name="tblCustomerAnswers" EntityType="Self.tblCustomerAnswer" />
+          <EntitySet Name="tblCustomerServices" EntityType="Self.tblCustomerService" />
+          <EntitySet Name="tblGroups" EntityType="Self.tblGroup" />
+          <EntitySet Name="tblMessages" EntityType="Self.tblMessage" />
+          <EntitySet Name="tblMobileOperators" EntityType="Self.tblMobileOperator" />
+          <EntitySet Name="tblQuestions" EntityType="Self.tblQuestion" />
+          <EntitySet Name="tblQuestionOptions" EntityType="Self.tblQuestionOption" />
+          <EntitySet Name="tblServiceStatus" EntityType="Self.tblServiceStatu" />
+          <EntitySet Name="tblStatus" EntityType="Self.tblStatu" />
+          <EntitySet Name="tblTelegramContents" EntityType="Self.tblTelegramContent" />
+          <EntitySet Name="tblTelegramCustomerServices" EntityType="Self.tblTelegramCustomerService" />
+          <EntitySet Name="tblTests" EntityType="Self.tblTest" />
+          <EntitySet Name="tblZones" EntityType="Self.tblZone" />
+          <EntitySet Name="vwContents" EntityType="Self.vwContent" />
+          <EntitySet Name="vwCustomerScores" EntityType="Self.vwCustomerScore" />
+          <AssociationSet Name="FK_accUserRole_accRole" Association="Self.FK_accUserRole_accRole">
+            <End Role="accRole" EntitySet="accRoles" />
+            <End Role="accUserRole" EntitySet="accUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accUserRole_accUser" Association="Self.FK_accUserRole_accUser">
+            <End Role="accUser" EntitySet="accUsers" />
+            <End Role="accUserRole" EntitySet="accUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_schScheduleLog_schScheduleJob" Association="Self.FK_schScheduleLog_schScheduleJob">
+            <End Role="schScheduleJob" EntitySet="schScheduleJobs" />
+            <End Role="schScheduleLog" EntitySet="schScheduleLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblClass_tblGroup" Association="Self.FK_tblClass_tblGroup">
+            <End Role="tblGroup" EntitySet="tblGroups" />
+            <End Role="tblClass" EntitySet="tblClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblClass_tblStatus" Association="Self.FK_tblClass_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblClass" EntitySet="tblClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblClass_tblZone" Association="Self.FK_tblClass_tblZone">
+            <End Role="tblZone" EntitySet="tblZones" />
+            <End Role="tblClass" EntitySet="tblClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContent_tblClass" Association="Self.FK_tblContent_tblClass">
+            <End Role="tblClass" EntitySet="tblClasses" />
+            <End Role="tblContent" EntitySet="tblContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblClass" Association="Self.FK_tblCustomerService_tblClass">
+            <End Role="tblClass" EntitySet="tblClasses" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContent_tblGroup" Association="Self.FK_tblContent_tblGroup">
+            <End Role="tblGroup" EntitySet="tblGroups" />
+            <End Role="tblContent" EntitySet="tblContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblContent_tblZone" Association="Self.FK_tblContent_tblZone">
+            <End Role="tblZone" EntitySet="tblZones" />
+            <End Role="tblContent" EntitySet="tblContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblContent" Association="Self.FK_tblCustomerService_tblContent">
+            <End Role="tblContent" EntitySet="tblContents" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramContent_tblContent" Association="Self.FK_tblTelegramContent_tblContent">
+            <End Role="tblContent" EntitySet="tblContents" />
+            <End Role="tblTelegramContent" EntitySet="tblTelegramContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomer_tblMobileOperator" Association="Self.FK_tblCustomer_tblMobileOperator">
+            <End Role="tblMobileOperator" EntitySet="tblMobileOperators" />
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAnswer_tblCustomer" Association="Self.FK_tblCustomerAnswer_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="tblCustomerAnswer" EntitySet="tblCustomerAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblCustomer" Association="Self.FK_tblCustomerService_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblCustomer" Association="Self.FK_tblTelegramCustomerService_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAnswer_tblCustomerService" Association="Self.FK_tblCustomerAnswer_tblCustomerService">
+            <End Role="tblCustomerService" EntitySet="tblCustomerServices" />
+            <End Role="tblCustomerAnswer" EntitySet="tblCustomerAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAnswer_tblQuestion" Association="Self.FK_tblCustomerAnswer_tblQuestion">
+            <End Role="tblQuestion" EntitySet="tblQuestions" />
+            <End Role="tblCustomerAnswer" EntitySet="tblCustomerAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblGroup" Association="Self.FK_tblCustomerService_tblGroup">
+            <End Role="tblGroup" EntitySet="tblGroups" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblQuestion" Association="Self.FK_tblCustomerService_tblQuestion">
+            <End Role="tblQuestion" EntitySet="tblQuestions" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblStatus" Association="Self.FK_tblCustomerService_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblTransferStatus" Association="Self.FK_tblCustomerService_tblTransferStatus">
+            <End Role="tblServiceStatus" EntitySet="tblServiceStatus" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerService_tblZone" Association="Self.FK_tblCustomerService_tblZone">
+            <End Role="tblZone" EntitySet="tblZones" />
+            <End Role="tblCustomerService" EntitySet="tblCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGroup_tblStatus" Association="Self.FK_tblGroup_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblGroup" EntitySet="tblGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGroup_tblZone" Association="Self.FK_tblGroup_tblZone">
+            <End Role="tblZone" EntitySet="tblZones" />
+            <End Role="tblGroup" EntitySet="tblGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuestion_tblTest" Association="Self.FK_tblQuestion_tblTest">
+            <End Role="tblTest" EntitySet="tblTests" />
+            <End Role="tblQuestion" EntitySet="tblQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQuestionOption_tblQuestion" Association="Self.FK_tblQuestionOption_tblQuestion">
+            <End Role="tblQuestion" EntitySet="tblQuestions" />
+            <End Role="tblQuestionOption" EntitySet="tblQuestionOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblServiceStatus" Association="Self.FK_tblTelegramCustomerService_tblServiceStatus">
+            <End Role="tblServiceStatus" EntitySet="tblServiceStatus" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblStatus" Association="Self.FK_tblTelegramCustomerService_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblStatus1" Association="Self.FK_tblTelegramCustomerService_tblStatus1">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblZone_tblStatus" Association="Self.FK_tblZone_tblStatus">
+            <End Role="tblStatus" EntitySet="tblStatus" />
+            <End Role="tblZone" EntitySet="tblZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramContent_tblZone" Association="Self.FK_tblTelegramContent_tblZone">
+            <End Role="tblZone" EntitySet="tblZones" />
+            <End Role="tblTelegramContent" EntitySet="tblTelegramContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblTelegramContent" Association="Self.FK_tblTelegramCustomerService_tblTelegramContent">
+            <End Role="tblTelegramContent" EntitySet="tblTelegramContents" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTelegramCustomerService_tblZone" Association="Self.FK_tblTelegramCustomerService_tblZone">
+            <End Role="tblZone" EntitySet="tblZones" />
+            <End Role="tblTelegramCustomerService" EntitySet="tblTelegramCustomerServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTest_tblZone" Association="Self.FK_tblTest_tblZone">
+            <End Role="tblZone" EntitySet="tblZones" />
+            <End Role="tblTest" EntitySet="tblTests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HealthMessageModelStoreContainer" CdmEntityContainer="HealthMessageEntities">
+          <EntitySetMapping Name="accRoles">
+            <EntityTypeMapping TypeName="HealthMessageModel.accRole">
+              <MappingFragment StoreEntitySet="accRole">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accUsers">
+            <EntityTypeMapping TypeName="HealthMessageModel.accUser">
+              <MappingFragment StoreEntitySet="accUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accUserRoles">
+            <EntityTypeMapping TypeName="HealthMessageModel.accUserRole">
+              <MappingFragment StoreEntitySet="accUserRole">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="errMessages">
+            <EntityTypeMapping TypeName="HealthMessageModel.errMessage">
+              <MappingFragment StoreEntitySet="errMessage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="logLevel" ColumnName="logLevel" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="exception" ColumnName="exception" />
+                <ScalarProperty Name="logDate" ColumnName="logDate" />
+                <ScalarProperty Name="isWarned" ColumnName="isWarned" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="schScheduleJobs">
+            <EntityTypeMapping TypeName="HealthMessageModel.schScheduleJob">
+              <MappingFragment StoreEntitySet="schScheduleJob">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="scheduleTime" ColumnName="scheduleTime" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="webServiceUrl" ColumnName="webServiceUrl" />
+                <ScalarProperty Name="parameter" ColumnName="parameter" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="schScheduleLogs">
+            <EntityTypeMapping TypeName="HealthMessageModel.schScheduleLog">
+              <MappingFragment StoreEntitySet="schScheduleLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="jobID" ColumnName="jobID" />
+                <ScalarProperty Name="runDate" ColumnName="runDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="finishDate" ColumnName="finishDate" />
+                <ScalarProperty Name="output" ColumnName="output" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HealthMessageModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAdvertisings">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblAdvertising">
+              <MappingFragment StoreEntitySet="tblAdvertising">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="isMale" ColumnName="isMale" />
+                <ScalarProperty Name="minAge" ColumnName="minAge" />
+                <ScalarProperty Name="maxAge" ColumnName="maxAge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblClasses">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblClass">
+              <MappingFragment StoreEntitySet="tblClass">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContents">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblContent">
+              <MappingFragment StoreEntitySet="tblContent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="classID" ColumnName="classID" />
+                <ScalarProperty Name="context" ColumnName="context" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="optionCount" ColumnName="optionCount" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomers">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblCustomer">
+              <MappingFragment StoreEntitySet="tblCustomer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="customerNo" ColumnName="customerNo" />
+                <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomerAnswers">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblCustomerAnswer">
+              <MappingFragment StoreEntitySet="tblCustomerAnswer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="customerServiceID" ColumnName="customerServiceID" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="questionID" ColumnName="questionID" />
+                <ScalarProperty Name="contentQuestionID" ColumnName="contentQuestionID" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="answerDate" ColumnName="answerDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomerServices">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblCustomerService">
+              <MappingFragment StoreEntitySet="tblCustomerService">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="classID" ColumnName="classID" />
+                <ScalarProperty Name="questionID" ColumnName="questionID" />
+                <ScalarProperty Name="contentID" ColumnName="contentID" />
+                <ScalarProperty Name="serviceStatusID" ColumnName="serviceStatusID" />
+                <ScalarProperty Name="sendSmsRequestID" ColumnName="sendSmsRequestID" />
+                <ScalarProperty Name="answerWait" ColumnName="answerWait" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+                <ScalarProperty Name="answerDate" ColumnName="answerDate" />
+                <ScalarProperty Name="score" ColumnName="score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGroups">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblGroup">
+              <MappingFragment StoreEntitySet="tblGroup">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMessages">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblMessage">
+              <MappingFragment StoreEntitySet="tblMessage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="messageFa" ColumnName="messageFa" />
+                <ScalarProperty Name="messageEn" ColumnName="messageEn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMobileOperators">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblMobileOperator">
+              <MappingFragment StoreEntitySet="tblMobileOperator">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblQuestions">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblQuestion">
+              <MappingFragment StoreEntitySet="tblQuestion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="testID" ColumnName="testID" />
+                <ScalarProperty Name="context" ColumnName="context" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblQuestionOptions">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblQuestionOption">
+              <MappingFragment StoreEntitySet="tblQuestionOption">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="questionID" ColumnName="questionID" />
+                <ScalarProperty Name="answerOption" ColumnName="answerOption" />
+                <ScalarProperty Name="score" ColumnName="score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblServiceStatus">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblServiceStatu">
+              <MappingFragment StoreEntitySet="tblServiceStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStatus">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblStatu">
+              <MappingFragment StoreEntitySet="tblStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTelegramContents">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblTelegramContent">
+              <MappingFragment StoreEntitySet="tblTelegramContent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="uID" ColumnName="uID" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+                <ScalarProperty Name="contentID" ColumnName="contentID" />
+                <ScalarProperty Name="context" ColumnName="context" />
+                <ScalarProperty Name="media" ColumnName="media" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTelegramCustomerServices">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblTelegramCustomerService">
+              <MappingFragment StoreEntitySet="tblTelegramCustomerService">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+                <ScalarProperty Name="ticket" ColumnName="ticket" />
+                <ScalarProperty Name="telegramID" ColumnName="telegramID" />
+                <ScalarProperty Name="telegramStatusID" ColumnName="telegramStatusID" />
+                <ScalarProperty Name="telegramContentID" ColumnName="telegramContentID" />
+                <ScalarProperty Name="serviceStatusID" ColumnName="serviceStatusID" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTests">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblTest">
+              <MappingFragment StoreEntitySet="tblTest">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblZones">
+            <EntityTypeMapping TypeName="HealthMessageModel.tblZone">
+              <MappingFragment StoreEntitySet="tblZone">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="correctScore" ColumnName="correctScore" />
+                <ScalarProperty Name="wrongScore" ColumnName="wrongScore" />
+                <ScalarProperty Name="serviceNo" ColumnName="serviceNo" />
+                <ScalarProperty Name="serviceID" ColumnName="serviceID" />
+                <ScalarProperty Name="freeServiceID" ColumnName="freeServiceID" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="structureMessage" ColumnName="structureMessage" />
+                <ScalarProperty Name="welcomeMessage" ColumnName="welcomeMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwContents">
+            <EntityTypeMapping TypeName="HealthMessageModel.vwContent">
+              <MappingFragment StoreEntitySet="vwContent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="classID" ColumnName="classID" />
+                <ScalarProperty Name="context" ColumnName="context" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="optionCount" ColumnName="optionCount" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="rowNo" ColumnName="rowNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwCustomerScores">
+            <EntityTypeMapping TypeName="HealthMessageModel.vwCustomerScore">
+              <MappingFragment StoreEntitySet="vwCustomerScore">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="rowNo" ColumnName="rowNo" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+                <ScalarProperty Name="answerDate" ColumnName="answerDate" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="zoneID" ColumnName="zoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

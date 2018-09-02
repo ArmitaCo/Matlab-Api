@@ -8,6 +8,7 @@ namespace Matlab.DataModel
         public string Title { get; set; }
         public string AnswersString { get; set; }
         public int ArticleId { get; set; }
+        public int AnswersCount { get; set; }
         public Article Article { get; set; }
         //public int CorrectAnswerId { get; set; }
         public ChoiceLable CorrectChoiceLable { get; set; }

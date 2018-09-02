@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matlab.Api", "Matlab.Api\Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matlab.Logger", "Matlab.Logger\Matlab.Logger.csproj", "{8B8F7914-9024-4097-80EC-B58EDC514C5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrateDataFromOldDbToMatlabDb", "MigrateDataFromOldDbToMatlabDb\MigrateDataFromOldDbToMatlabDb.csproj", "{F654A2FA-381B-4A28-A6AD-75C39355576C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8B8F7914-9024-4097-80EC-B58EDC514C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B8F7914-9024-4097-80EC-B58EDC514C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B8F7914-9024-4097-80EC-B58EDC514C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F654A2FA-381B-4A28-A6AD-75C39355576C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F654A2FA-381B-4A28-A6AD-75C39355576C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F654A2FA-381B-4A28-A6AD-75C39355576C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F654A2FA-381B-4A28-A6AD-75C39355576C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
