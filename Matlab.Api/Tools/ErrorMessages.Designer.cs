@@ -187,6 +187,15 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to دسته بندی مورد نظر یافت نشد.
+        /// </summary>
+        internal static string RequestedCategoryNotFound {
+            get {
+                return ResourceManager.GetString("RequestedCategoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره موبایل الزامیست.
         /// </summary>
         internal static string RequierdMobile {
@@ -201,6 +210,15 @@ namespace Matlab.Api.Tools {
         internal static string RequierdPassword {
             get {
                 return ResourceManager.GetString("RequierdPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to موفقیت آمیز.
+        /// </summary>
+        internal static string Successful {
+            get {
+                return ResourceManager.GetString("Successful", resourceCulture);
             }
         }
     }

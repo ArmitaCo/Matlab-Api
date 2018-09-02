@@ -247,6 +247,11 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Tools\Actions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Actions.resx</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Validators.cs" />
     <Compile Include="Tools\ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -377,6 +382,10 @@
       <Project>{00c2472c-3993-4c23-9b1e-afd3184c2ad9}</Project>
       <Name>Matlab.DataModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Matlab.Logger\Matlab.Logger.csproj">
+      <Project>{8b8f7914-9024-4097-80ec-b58edc514c5b}</Project>
+      <Name>Matlab.Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -385,6 +394,10 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Tools\Actions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Actions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tools\ErrorMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>

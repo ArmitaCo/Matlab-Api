@@ -3,7 +3,7 @@
 namespace Matlab.DataModel
 {
     [Flags]
-    public enum UsePackageState
+    public enum UserPackageState
     {
         Owned=1,
         Vas=2,
