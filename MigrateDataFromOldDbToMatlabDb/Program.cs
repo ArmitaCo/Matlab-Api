@@ -82,13 +82,13 @@ namespace MigrateDataFromOldDbToMatlabDb
                 var answersList = questionParts.Skip(1).Select((x, y) => new Answer()
                 {
                     Title = x,
-                    ChoiceLable = (ChoiceLable)y + 11,
+                    ChoiceLable = (ChoiceLable)y,
                     IsCorrect = y.ToString() == itemContent.answer,
                 }).ToList();
 
                 for (int i = 0; i < answersList.Count; i++)
                 {
-                    answerString += $"{_answerStrings[i]}. {answersList[i]}\n";
+                    answerString += $"{_answerStrings[i]}. {answersList[i].Title}\n";
                 }
 
                 Debug.Assert(itemContent.optionCount != null, "itemContent.optionCount != null");

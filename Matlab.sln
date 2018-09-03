@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matlab.Logger", "Matlab.Log
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrateDataFromOldDbToMatlabDb", "MigrateDataFromOldDbToMatlabDb\MigrateDataFromOldDbToMatlabDb.csproj", "{F654A2FA-381B-4A28-A6AD-75C39355576C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matlab.ArticleImageSuggestionTool", "Matlab.ArticleImageSuggestionTool\Matlab.ArticleImageSuggestionTool.csproj", "{5F92E0D1-D5F5-4BF8-8E88-69DFC5E3097F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F654A2FA-381B-4A28-A6AD-75C39355576C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F654A2FA-381B-4A28-A6AD-75C39355576C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F654A2FA-381B-4A28-A6AD-75C39355576C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F92E0D1-D5F5-4BF8-8E88-69DFC5E3097F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F92E0D1-D5F5-4BF8-8E88-69DFC5E3097F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F92E0D1-D5F5-4BF8-8E88-69DFC5E3097F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F92E0D1-D5F5-4BF8-8E88-69DFC5E3097F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

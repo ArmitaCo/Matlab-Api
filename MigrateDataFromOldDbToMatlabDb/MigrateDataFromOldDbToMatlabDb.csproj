@@ -161,12 +161,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Matlab.DataModel\Matlab.DataModel.csproj">
-      <Project>{00c2472c-3993-4c23-9b1e-afd3184c2ad9}</Project>
-      <Name>Matlab.DataModel</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="OldDb\OldModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OldModel.Context.cs</LastGenOutput>
@@ -180,6 +174,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Matlab.DataModel\Matlab.DataModel.csproj">
+      <Project>{00c2472c-3993-4c23-9b1e-afd3184c2ad9}</Project>
+      <Name>Matlab.DataModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

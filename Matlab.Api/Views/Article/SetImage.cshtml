@@ -1,0 +1,114 @@
+﻿@using Matlab.DataModel
+@model Matlab.DataModel.Article
+
+@{
+  Layout = "";
+}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  @Styles.Render("~/Content/css")
+  @Scripts.Render("~/bundles/modernizr")
+
+  <title>افزودن عکس پیشنهادی</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>انتخاب عکس</h1><br />
+        <h5>متن اصلی</h5>
+        <p>@Model.Title</p>
+        <h5>سوال</h5>
+        <p>@Model.Question.Title</p>
+        <h5>جواب</h5>
+        @foreach (Answer answer in Model.Question.Answers)
+        {
+          <p>@answer.Text</p>
+        }
+
+        @using (Html.BeginForm("SetImage", "Article", FormMethod.Post))
+        {
+          <input type="hidden" name="id1" value="@Model.Id" />
+          <div class="card-deck">
+
+            @foreach (ImageSuggest suggest in Model.ImageSuggests)
+            {
+              <div class="card ">
+                <div class="card-body text-center">
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="id2" value="@suggest.Id" required><img src="@suggest.AbsoluteImageUrl" class="img-thumbnail" />
+                    </label>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <a href="#" class="btn-block preview"  data-toggle="modal" data-target="#myModal">پیش نمایش</a>
+                </div>
+              </div>
+
+
+            }
+
+
+          </div>
+          <br/>
+          <button class="btn btn-default btn-block btn-lg">ثبت</button>
+        }
+      </div>
+      
+    </div>
+    
+    <div class="modal" id="myModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+      
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">پیشنمایش عکس</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+        
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="container-fluid">
+              <img id="preview" class="col-12"/>
+            </div>
+          </div>
+        
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+      $(document).ready(function () {
+        //if (window.FileReader != null) {
+        //  $('#single').hide();
+        //  $('.single').prop('disabled', true);
+        //} else {
+        //  $('#multiple').hide();
+        //  $('.multiple').prop('disabled', true);
+        //}
+
+
+        $(".plus").click(function () {
+          var i = $('<br /><input type="file" class="single form-control" name="files" />');
+          $(i).insertAfter($(this));
+        });
+        $(".preview").click(function() {
+          var link = $(this).parents(".card").find("img").attr("src");
+          $("#preview").attr("src", link);
+        });
+      });
+    </script>
+  </div>
+</body>
+
