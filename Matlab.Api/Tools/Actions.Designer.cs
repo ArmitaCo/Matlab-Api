@@ -70,6 +70,15 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to دریافت جعبه های بسته.
+        /// </summary>
+        internal static string PackageBoxesRequested {
+            get {
+                return ResourceManager.GetString("PackageBoxesRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to دریافت بسته های دسته بندی.
         /// </summary>
         internal static string PackagesOfCategoryRequested {

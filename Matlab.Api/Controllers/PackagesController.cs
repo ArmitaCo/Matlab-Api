@@ -23,33 +23,7 @@ namespace Matlab.Api.Controllers
     {
         public ApplicationUserManager UserManager => Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
         MatlabDb db = new MatlabDb();
-        // GET: api/Packages
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
 
-        //// GET: api/Packages/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST: api/Packages
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        //// PUT: api/Packages/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        //// DELETE: api/Packages/5
-        //public void Delete(int id)
-        //{
-        //}
-        //[Route("Packages/Categories")]
         [HttpPost]
         public async Task<ResponseMessage> Categories()
         {
@@ -137,5 +111,38 @@ namespace Matlab.Api.Controllers
                 return Tools.ResponseMessage.InternalError;
             }
         }
+
+        //[HttpPost]
+        //public async Task<ResponseMessage> PackageBoxes(IdRequestViewModel model)
+        //{
+        //    try
+        //    {
+        //        var userId = User.Identity.GetUserId();
+        //        var user = await UserManager.FindByIdAsync(userId);
+        //        var userPackage = user.UserPackages.FirstOrDefault(x => x.PackageId == model.Id && x.UserId == userId);
+        //        if (userPackage == null)
+        //        {
+        //            LogThis.BaseLog(Request, LogLevel.Warn, Actions.PackageBoxesRequested, new Dictionary<LogProperties, object>
+        //            {
+        //                {LogProperties.Id, model.Id},
+        //                {LogProperties.Message,ErrorMessages.UserPackageNotFound }
+        //            });
+        //            return new ResponseMessage(Tools.ResponseMessage.ResponseCode.NotFound, ErrorMessages.UserPackageNotFound);
+        //        }
+
+        //        var package = userPackage.Package;
+                
+
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        LogThis.BaseLog(Request, LogLevel.Error, Actions.CategoriesRequested, new Dictionary<LogProperties, object>
+        //        {
+        //            {LogProperties.Error,e }
+        //        });
+        //        return Tools.ResponseMessage.InternalError;
+        //    }
+        //}
     }
 }

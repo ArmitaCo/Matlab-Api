@@ -101,8 +101,8 @@ namespace Matlab.ArticleImageSuggestionTool
                 {
                     textBoxQuestionTitle.Text += answer.Text + Environment.NewLine;
                 }
-                labelCategory.Text = article.Package.Catergory.Title;
-                labelPackage.Text = article.Package.Title;
+                labelCategory.Text = article.Box.Package.Catergory.Title;
+                labelPackage.Text = article.Box.Package.Title;
                 _currentArticleId = article.Id;
                 listBox1.Items.Clear();
 

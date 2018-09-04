@@ -21,12 +21,14 @@ namespace Matlab.DataModel
         public string ImageUrl { get; set; }
         public int Order { get; set; }
         public int PackageId { get; set; }
-        public virtual Package Package { get; set; }
+        public int BoxId { get; set; }
+        //public virtual Package Package { get; set; }
         public virtual Question Question { get; set; }
+        public virtual Box Box { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
         public virtual ICollection<ImageSuggest> ImageSuggests { get; set; }
         public virtual ICollection<ExternalArticle> ExternalArticles { get; set; }
-
+        
         [NotMapped]
         public string AbsoluteImageUrl => _baseUrl + ImageUrl;
 

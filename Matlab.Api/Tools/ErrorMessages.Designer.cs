@@ -221,5 +221,14 @@ namespace Matlab.Api.Tools {
                 return ResourceManager.GetString("Successful", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to بسته مورد نظر برای کاربر تعریف نشده است.
+        /// </summary>
+        internal static string UserPackageNotFound {
+            get {
+                return ResourceManager.GetString("UserPackageNotFound", resourceCulture);
+            }
+        }
     }
 }

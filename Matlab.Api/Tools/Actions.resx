@@ -120,6 +120,9 @@
   <data name="CategoriesRequested" xml:space="preserve">
     <value>دریافت دسته بندی ها</value>
   </data>
+  <data name="PackageBoxesRequested" xml:space="preserve">
+    <value>دریافت جعبه های بسته</value>
+  </data>
   <data name="PackagesOfCategoryRequested" xml:space="preserve">
     <value>دریافت بسته های دسته بندی</value>
   </data>

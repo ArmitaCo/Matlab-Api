@@ -171,4 +171,7 @@
   <data name="Successful" xml:space="preserve">
     <value>موفقیت آمیز</value>
   </data>
+  <data name="UserPackageNotFound" xml:space="preserve">
+    <value>بسته مورد نظر برای کاربر تعریف نشده است</value>
+  </data>
 </root>

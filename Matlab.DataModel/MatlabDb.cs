@@ -16,6 +16,8 @@ namespace Matlab.DataModel
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<ExternalArticle> ExternalArticles { get; set; }
+        public virtual DbSet<Box> Boxes { get; set; }
+        public virtual DbSet<UserPackageBox> UserPackageBoxes { get; set; }
 
         #region Overrides of IdentityDbContext<ApplicationUser,IdentityRole,string,IdentityUserLogin,IdentityUserRole,IdentityUserClaim>
 
@@ -55,7 +57,7 @@ namespace Matlab.DataModel
                 .HasForeignKey(x => x.ArticleId);
 
             modelBuilder.Entity<Package>()
-                .HasMany(x => x.Articles)
+                .HasMany(x => x.Boxes)
                 .WithRequired(x => x.Package)
                 .HasForeignKey(x => x.PackageId);
 
@@ -92,6 +94,22 @@ namespace Matlab.DataModel
                 .HasMany(x => x.ExternalArticles)
                 .WithOptional(x => x.SuggestedByUser)
                 .HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<UserPackage>()
+                .HasMany(x => x.UserPackageBoxes)
+                .WithOptional(x => x.UserPackage)
+                .HasForeignKey(x => x.UserPackageId);
+
+            modelBuilder.Entity<Box>()
+                .HasMany(x => x.UserPackageBoxes)
+                .WithOptional(x => x.Box)
+                .HasForeignKey(x => x.BoxId);
+
+            modelBuilder.Entity<Box>()
+                .HasMany(x => x.Articles)
+                .WithOptional(x => x.Box)
+                .HasForeignKey(x => x.BoxId);
+
         }
 
         #endregion
