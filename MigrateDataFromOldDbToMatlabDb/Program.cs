@@ -15,7 +15,7 @@ namespace MigrateDataFromOldDbToMatlabDb
     {
         static Matlab.DataModel.MatlabDb _matlabDb = new MatlabDb();
         static HealthMessageEntities _healthMessageEntities = new HealthMessageEntities();
-        private static string[] _answerStrings = new[] {"الف", "ب", "ج", "د"};
+        private static string[] _answerStrings = new[] { "الف", "ب", "ج", "د" };
         static void Main(string[] args)
         {
             var catergories = _matlabDb.Catergories;
@@ -72,6 +72,32 @@ namespace MigrateDataFromOldDbToMatlabDb
             foreach (var itemContent in content)
             {
                 int packageid = classToPackageDictionary.First(x => x.cls.ID == itemContent.classID).pack.Id;
+                var package = _matlabDb.Packages.Find(packageid);
+                var boxes = package?.Boxes?.ToList();
+                Box box;
+                if (boxes == null || boxes.Count == 0)
+                {
+                    box = new Box()
+                    {
+                        Code = 0
+                    };
+                    package.Boxes.Add(box);
+                    _matlabDb.SaveChanges();
+                }
+                else if (boxes.All(x => x.Articles.Count == 5))
+                {
+                    int code = boxes.Max(x => x.Code) + 1;
+                    box=new Box()
+                    {
+                        Code = code
+                    };
+                    package.Boxes.Add(box);
+                    _matlabDb.SaveChanges();
+                }
+                else
+                {
+                    box = boxes.Single(x => x.Articles.Count < 5);
+                }
                 string baseQuestion = itemContent.question.Replace("- ", "").Replace("\r\n", "");
                 string[] questionParts = baseQuestion.Split(new String[] { "11", "12", "13", "14" },
                     StringSplitOptions.RemoveEmptyEntries);
@@ -95,14 +121,14 @@ namespace MigrateDataFromOldDbToMatlabDb
                 Article article = new Article()
                 {
                     Title = itemContent.context,
-                    PackageId = packageid,
+                    Box = box,
                     Order = itemContent.code,
                     Question = new Question()
                     {
                         Title = questionText,
-                        CorrectChoiceLable = (ChoiceLable)(int.Parse(itemContent.answer)-11),
+                        CorrectChoiceLable = (ChoiceLable)(int.Parse(itemContent.answer) - 11),
                         Answers = answersList,
-                        AnswersCount = (int) itemContent.optionCount,
+                        AnswersCount = (int)itemContent.optionCount,
                         AnswersString = answerString,
                     }
 

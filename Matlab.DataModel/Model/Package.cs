@@ -5,6 +5,13 @@ namespace Matlab.DataModel
 {
     public class Package
     {
+        public Package()
+        {
+            if (Boxes==null)
+            {
+                Boxes=new HashSet<Box>();
+            }
+        }
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

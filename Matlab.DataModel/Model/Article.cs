@@ -20,7 +20,7 @@ namespace Matlab.DataModel
         [JsonIgnore]
         public string ImageUrl { get; set; }
         public int Order { get; set; }
-        public int PackageId { get; set; }
+        //public int PackageId { get; set; }
         public int BoxId { get; set; }
         //public virtual Package Package { get; set; }
         public virtual Question Question { get; set; }

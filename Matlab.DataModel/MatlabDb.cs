@@ -97,17 +97,17 @@ namespace Matlab.DataModel
 
             modelBuilder.Entity<UserPackage>()
                 .HasMany(x => x.UserPackageBoxes)
-                .WithOptional(x => x.UserPackage)
+                .WithRequired(x => x.UserPackage)
                 .HasForeignKey(x => x.UserPackageId);
 
             modelBuilder.Entity<Box>()
                 .HasMany(x => x.UserPackageBoxes)
-                .WithOptional(x => x.Box)
-                .HasForeignKey(x => x.BoxId);
+                .WithRequired(x => x.Box)
+                .HasForeignKey(x => x.BoxId).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Box>()
                 .HasMany(x => x.Articles)
-                .WithOptional(x => x.Box)
+                .WithRequired(x => x.Box)
                 .HasForeignKey(x => x.BoxId);
 
         }
