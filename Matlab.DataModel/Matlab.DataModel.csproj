@@ -92,6 +92,8 @@
     <Compile Include="Model\Catergory.cs" />
     <Compile Include="Enum\ChoiceLable.cs" />
     <Compile Include="Model\Article.cs" />
+    <Compile Include="Model\ExternalArticle.cs" />
+    <Compile Include="Enum\ExternalArticleState.cs" />
     <Compile Include="Model\Favorite.cs" />
     <Compile Include="Model\ImageSuggest.cs" />
     <Compile Include="Model\Package.cs" />

@@ -15,6 +15,7 @@ namespace Matlab.DataModel
         public virtual DbSet<ImageSuggest> ImageSuggests { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<ExternalArticle> ExternalArticles { get; set; }
 
         #region Overrides of IdentityDbContext<ApplicationUser,IdentityRole,string,IdentityUserLogin,IdentityUserRole,IdentityUserClaim>
 
@@ -82,6 +83,15 @@ namespace Matlab.DataModel
                 .HasOptional(x => x.Question)
                 .WithRequired(x => x.Article);
 
+            modelBuilder.Entity<Article>()
+                .HasMany(x => x.ExternalArticles)
+                .WithRequired(x => x.Article)
+                .HasForeignKey(x => x.ArticleId);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(x => x.ExternalArticles)
+                .WithOptional(x => x.SuggestedByUser)
+                .HasForeignKey(x => x.UserId);
         }
 
         #endregion

@@ -25,11 +25,10 @@ namespace Matlab.DataModel
         public virtual Question Question { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
         public virtual ICollection<ImageSuggest> ImageSuggests { get; set; }
-
+        public virtual ICollection<ExternalArticle> ExternalArticles { get; set; }
 
         [NotMapped]
         public string AbsoluteImageUrl => _baseUrl + ImageUrl;
 
     }
-
 }

@@ -21,5 +21,6 @@ namespace Matlab.DataModel
         public virtual ICollection<UserPackage> UserPackages { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<ExternalArticle> ExternalArticles { get; set; }
     }
 }

@@ -1,0 +1,69 @@
+﻿@using Matlab.DataModel
+@model Matlab.DataModel.Article
+
+@{
+  Layout = "";
+}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  @Styles.Render("~/Content/css")
+  @Scripts.Render("~/bundles/modernizr")
+  
+  <title>افزودن جستار پیشنهادی</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <h1>افزودن جستار پیشنهادی</h1>
+      <h5>متن اصلی</h5>
+      <p>@Model.Title</p>
+      <h5>سوال</h5>
+      <p>@Model.Question.Title</p>
+      <h5>جواب</h5>
+      @foreach (Answer answer in Model.Question.Answers)
+      {
+        <p>@answer.Text</p>
+      }
+    </div>
+      <div class="col-3">
+      @using (Html.BeginForm("AddExternalLink", "ExternalArticle", FormMethod.Post, new { enctype = "multipart/form-data", @class = "" }))
+      {
+        @Html.HiddenFor(x => x.Id)
+        
+        <div id="single">
+          <br />
+          <span class="plus lead h1 btn btn-lg btn-success btn-block">افزودن جستار</span><br />
+          <div class="form-group">
+            <label class="col-form-label">جستار</label>
+            <input type="url" class="form-control" name="links" required placeholder="آدرس"/><br/>
+            <input type="text" class="form-control" name="titles" required placeholder="عنوان"/><br/>
+          </div>
+        </div>
+        <button class="btn btn-default btn-block btn-lg">ذخیره</button>
+      }
+      </div>
+      @Scripts.Render("~/bundles/jquery")
+      @Scripts.Render("~/bundles/bootstrap")
+      <script>
+        $(document).ready(function () {
+          //if (window.FileReader != null) {
+          //  $('#single').hide();
+          //  $('.single').prop('disabled', true);
+          //} else {
+          //  $('#multiple').hide();
+          //  $('.multiple').prop('disabled', true);
+          //}
+
+
+          $(".plus").click(function () {
+            var i = $('<div class="form-group"><label class="col-form-label">جستار</label><input type="url" class="form-control" name="links" required  placeholder="آدرس"/><br /><input type="text" class="form-control" name="titles" required required placeholder="عنوان"/><br/></div>');
+            $(i).insertAfter($(this));
+          });
+        });
+      </script>
+    </div>
+</div>
+</body>
+

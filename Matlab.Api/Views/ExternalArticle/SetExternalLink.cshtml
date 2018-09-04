@@ -10,13 +10,13 @@
   @Styles.Render("~/Content/css")
   @Scripts.Render("~/bundles/modernizr")
 
-  <title>افزودن عکس پیشنهادی</title>
+  <title>بررسی جستار های پیشنهادی</title>
 </head>
 <body>
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1>انتخاب عکس</h1><br />
+        <h1>بررسی جستار های پیشنهادی</h1><br />
         <h5>متن اصلی</h5>
         <p>@Model.Title</p>
         <h5>سوال</h5>
@@ -27,23 +27,26 @@
           <p>@answer.Text</p>
         }
 
-        @using (Html.BeginForm("SetImage", "Article", FormMethod.Post))
+        @using (Html.BeginForm("SetExternalLink", "ExternalArticle", FormMethod.Post))
         {
-          <input type="hidden" name="id1" value="@Model.Id" />
           <div class="card-deck">
 
-            @foreach (ImageSuggest suggest in Model.ImageSuggests)
+            @foreach (ExternalArticle article in Model.ExternalArticles.Where(x => x.State == ExternalArticleState.Suggested))
             {
               <div class="card ">
-                <div class="card-body text-center">
+                <div class="card-body text-right">
                   <div class="form-check-inline">
-                    <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="id2" value="@suggest.Id" required><img src="@suggest.AbsoluteImageUrl" class="img-thumbnail" />
+                    <label class="form-check-label ">
+                      <input type="checkbox" class="form-check-input " name="links" value="@article.Id">
+                      <a href="@article.Url" >@article.Title</a>
                     </label>
                   </div>
                 </div>
                 <div class="card-footer">
-                  <a href="#" class="btn-block preview"  data-toggle="modal" data-target="#myModal">پیش نمایش</a>
+                  <div class="container">
+                    <a href="#" class="btn btn-primary btn-block preview" data-toggle="modal" data-target="#myModal">پیش نمایش</a>
+                    <a href="@article.Url" target="_blank" class="btn btn-secondary btn-block">باز کردن</a>
+                  </div>
                 </div>
               </div>
 
@@ -52,35 +55,37 @@
 
 
           </div>
-          <br/>
-          <button class="btn btn-default btn-block btn-lg">ثبت</button>
+          <br />
+          <button name="state" class="btn btn-success btn-lg" type="submit" value="@ExternalArticleState.Approved">تایید</button>
+          <button name="state" class="btn btn-danger btn-lg" type="submit" value="@ExternalArticleState.Denied">حذف</button>
+          <button name="state" class="btn btn-warning btn-lg" type="submit" value="@ExternalArticleState.Crupted">مخدوش</button>
         }
       </div>
-      
+
     </div>
-    
+
     <div class="modal" id="myModal">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-lg h-75">
         <div class="modal-content">
-      
+
           <!-- Modal Header -->
           <div class="modal-header">
             <h4 class="modal-title">پیش نمایش عکس</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-        
+
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="container-fluid">
-              <img id="preview" class="col-12"/>
+            <div class="container-fluid h-75">
+              <embed id="preview" class="col-12 h-100" />
             </div>
           </div>
-        
+
           <!-- Modal footer -->
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
           </div>
-        
+
         </div>
       </div>
     </div>
@@ -90,9 +95,9 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script>
       $(document).ready(function () {
-        
-        $(".preview").click(function() {
-          var link = $(this).parents(".card").find("img").attr("src");
+
+        $(".preview").click(function () {
+          var link = $(this).parents(".card").find("a")[0];
           $("#preview").attr("src", link);
         });
       });
