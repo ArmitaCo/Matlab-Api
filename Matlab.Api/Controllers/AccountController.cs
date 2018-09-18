@@ -69,7 +69,7 @@ namespace Matlab.Api.Controllers
                     LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
                 });
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return Tools.ResponseMessage.InternalError;
             }
@@ -85,7 +85,7 @@ namespace Matlab.Api.Controllers
                 Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
                 return Tools.ResponseMessage.Ok;
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return Tools.ResponseMessage.InternalError;
             }
@@ -95,7 +95,7 @@ namespace Matlab.Api.Controllers
         [Route("ManageInfo")]
         public async Task<ResponseMessage> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            string ip = StaticTools.GetIp(Request);
+            //string ip = StaticTools.GetIp(Request);
             try
             {
                 IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -133,7 +133,7 @@ namespace Matlab.Api.Controllers
                     ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
                 });
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return Tools.ResponseMessage.InternalError;
             }
@@ -143,7 +143,7 @@ namespace Matlab.Api.Controllers
         [Route("ChangePassword")]
         public async Task<ResponseMessage> ChangePassword(ChangePasswordBindingModel model)
         {
-            string ip = StaticTools.GetIp(Request);
+            //string ip = StaticTools.GetIp(Request);
             try
             {
                 if (!ModelState.IsValid)
@@ -171,7 +171,7 @@ namespace Matlab.Api.Controllers
         [Route("SetPassword")]
         public async Task<ResponseMessage> SetPassword(SetPasswordBindingModel model)
         {
-            string ip = StaticTools.GetIp(Request);
+            //string ip = StaticTools.GetIp(Request);
             try
             {
                 if (!ModelState.IsValid)
@@ -198,7 +198,7 @@ namespace Matlab.Api.Controllers
         [Route("AddExternalLogin")]
         public async Task<ResponseMessage> AddExternalLogin(AddExternalLoginBindingModel model)
         {
-            string ip = StaticTools.GetIp(Request);
+            //string ip = StaticTools.GetIp(Request);
             try
             {
                 if (!ModelState.IsValid)
@@ -245,7 +245,7 @@ namespace Matlab.Api.Controllers
         [Route("RemoveLogin")]
         public async Task<ResponseMessage> RemoveLogin(RemoveLoginBindingModel model)
         {
-            string ip = StaticTools.GetIp(Request);
+            //string ip = StaticTools.GetIp(Request);
             try
             {
                 if (!ModelState.IsValid)
@@ -285,7 +285,7 @@ namespace Matlab.Api.Controllers
         [Route("ExternalLogin", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
-            string ip = StaticTools.GetIp(Request);
+            //string ip = StaticTools.GetIp(Request);
             try
             {
                 if (error != null)

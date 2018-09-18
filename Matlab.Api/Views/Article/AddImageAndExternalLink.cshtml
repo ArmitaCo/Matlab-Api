@@ -1,0 +1,96 @@
+﻿@using Matlab.DataModel
+@model Matlab.DataModel.Article
+
+@{
+  Layout = "";
+}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  @Styles.Render("~/Content/css")
+  @Scripts.Render("~/bundles/modernizr")
+
+  <title>افزودن عکس پیشنهادی و لینک جستار خارجی</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h5>متن اصلی</h5>
+        <p>@Model.Id .@Model.Title</p>
+        @foreach (Question question in Model.Questions)
+        {
+          <h5>سوال</h5>
+          <p>@question.Title</p>
+          <h5>جواب</h5>
+          foreach (Answer answer in question.Answers)
+          {
+            <p>@answer.Text</p>
+          }
+        }
+
+
+      </div>
+    </div>
+    <hr />
+    @using (Html.BeginForm("AddImageAndExternalLink", "Article", FormMethod.Post, new { enctype = "multipart/form-data", @class = "" }))
+    {
+      @Html.HiddenFor(x => x.Id)
+
+      <div class="row">
+        <div class="col-3 border">
+          <h1>افزودن عکس</h1>
+
+          <div id="multiple">
+            <input type="file" class="multiple form-control" name="files" multiple />
+          </div>
+          <div id="single">
+            <br />
+            <span class="plusimage lead h1 btn btn-lg btn-success col-3">+</span><br />
+            <input type="file" class="single form-control" name="files" /><br />
+
+          </div>
+
+
+        </div>
+        <div class="col-9 border">
+
+          <div id="single">
+            <br />
+            <span class="pluslink lead h1 btn btn-lg btn-success btn-block">افزودن جستار</span><br />
+            
+          </div>
+
+        </div>
+      </div>
+      <button class="btn btn-default btn-block btn-lg">آپلود</button>
+    }
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+      $(document).ready(function () {
+        //if (window.FileReader != null) {
+        //  $('#single').hide();
+        //  $('.single').prop('disabled', true);
+        //} else {
+        //  $('#multiple').hide();
+        //  $('.multiple').prop('disabled', true);
+        //}
+
+
+        $(".plusimage").click(function () {
+          var i = $('<br /><input type="file" class="single form-control" name="files" />');
+          $(i).insertAfter($(this));
+        });
+
+        $(".pluslink").click(function () {
+          var i = $('<div class="form-group"><label class="col-form-label">جستار</label><input type="url" class="form-control" name="links" required  placeholder="آدرس"/><br /><input type="text" class="form-control" name="titles" required required placeholder="عنوان"/><br/></div>');
+          $(i).insertAfter($(this));
+        });
+      });
+    </script>
+
+  </div>
+</body>
+

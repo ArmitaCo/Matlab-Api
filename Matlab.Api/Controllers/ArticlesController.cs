@@ -86,7 +86,7 @@ namespace Matlab.Api.Controllers
                 dict.Add("error", res);
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 var res = string.Format("some Message");
                 dict.Add("error", res);
@@ -101,7 +101,6 @@ namespace Matlab.Api.Controllers
             Debug.Assert(article != null, nameof(article) + " != null");
             return Tools.ResponseMessage.OkWithResult(article.ImageSuggests.Select(x=>x.AbsoluteImageUrl).ToList());
         }
-
 
     }
 }

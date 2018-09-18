@@ -37,7 +37,7 @@ namespace Matlab.Logger
             return request?.GetUserPrincipal()?.Identity.Name;
         }
 
-        public static async void BaseLog(HttpRequestMessage request, LogLevel logLevel, string action = null, Dictionary<LogProperties, object> dataDictionary = null)
+        public static  void BaseLog(HttpRequestMessage request, LogLevel logLevel, string action = null, Dictionary<LogProperties, object> dataDictionary = null)
         {
             if (dataDictionary==null)
             {
@@ -52,7 +52,7 @@ namespace Matlab.Logger
             BaseLog(logLevel,dataDictionary);
         }
 
-        private static async void BaseLog(LogLevel logLevel, Dictionary<LogProperties, object> dataDictionary = null)
+        private static  void BaseLog(LogLevel logLevel, Dictionary<LogProperties, object> dataDictionary = null)
         {
             if (dataDictionary == null)
             {
@@ -79,7 +79,12 @@ namespace Matlab.Logger
         Action,
         Message,
         Error,
-        Id
+        Id,
+        IdType,
+        From,
+        To,
+        AdditionalData,
+        State
     }
 
     

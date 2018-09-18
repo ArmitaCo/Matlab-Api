@@ -14,7 +14,7 @@ namespace Matlab.DataModel
             if (ImageSuggests == null) ImageSuggests = new HashSet<ImageSuggest>();
             if (Favorites == null) Favorites = new HashSet<Favorite>();
         }
-        private static string _baseUrl = "http://31.25.130.239/Images/Articles/";
+        
         public int Id { get; set; }
         public string Title { get; set; }
         [JsonIgnore]
@@ -23,14 +23,14 @@ namespace Matlab.DataModel
         //public int PackageId { get; set; }
         public int BoxId { get; set; }
         //public virtual Package Package { get; set; }
-        public virtual Question Question { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
         public virtual Box Box { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
         public virtual ICollection<ImageSuggest> ImageSuggests { get; set; }
         public virtual ICollection<ExternalArticle> ExternalArticles { get; set; }
         
         [NotMapped]
-        public string AbsoluteImageUrl => _baseUrl + ImageUrl;
+        public string AbsoluteImageUrl => string.IsNullOrWhiteSpace(ImageUrl) ? null : Defaults.BaseImageUrl + ImageUrl;
 
     }
 }

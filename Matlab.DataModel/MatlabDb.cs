@@ -82,8 +82,9 @@ namespace Matlab.DataModel
                 .HasForeignKey(x => x.UserId);
 
             modelBuilder.Entity<Article>()
-                .HasOptional(x => x.Question)
-                .WithRequired(x => x.Article);
+                .HasMany(x => x.Questions)
+                .WithRequired(x => x.Article)
+                .HasForeignKey(x => x.ArticleId);
 
             modelBuilder.Entity<Article>()
                 .HasMany(x => x.ExternalArticles)
@@ -109,6 +110,8 @@ namespace Matlab.DataModel
                 .HasMany(x => x.Articles)
                 .WithRequired(x => x.Box)
                 .HasForeignKey(x => x.BoxId);
+
+            
 
         }
 

@@ -19,12 +19,15 @@
         <h1>انتخاب عکس</h1><br />
         <h5>متن اصلی</h5>
         <p>@Model.Title</p>
-        <h5>سوال</h5>
-        <p>@Model.Question.Title</p>
-        <h5>جواب</h5>
-        @foreach (Answer answer in Model.Question.Answers)
+        @foreach (Question question in Model.Questions)
         {
-          <p>@answer.Text</p>
+          <h5>سوال</h5>
+          <p>@question.Title</p>
+          <h5>جواب</h5>
+          foreach (Answer answer in question.Answers)
+          {
+            <p>@answer.Text</p>
+          }
         }
 
         @using (Html.BeginForm("SetImage", "Article", FormMethod.Post))
@@ -43,7 +46,7 @@
                   </div>
                 </div>
                 <div class="card-footer">
-                  <a href="#" class="btn-block preview"  data-toggle="modal" data-target="#myModal">پیش نمایش</a>
+                  <a href="#" class="btn-block preview" data-toggle="modal" data-target="#myModal">پیش نمایش</a>
                 </div>
               </div>
 
@@ -52,35 +55,35 @@
 
 
           </div>
-          <br/>
+          <br />
           <button class="btn btn-default btn-block btn-lg">ثبت</button>
         }
       </div>
-      
+
     </div>
-    
+
     <div class="modal" id="myModal">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
-      
+
           <!-- Modal Header -->
           <div class="modal-header">
             <h4 class="modal-title">پیش نمایش عکس</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-        
+
           <!-- Modal body -->
           <div class="modal-body">
             <div class="container-fluid">
-              <img id="preview" class="col-12"/>
+              <img id="preview" class="col-12" />
             </div>
           </div>
-        
+
           <!-- Modal footer -->
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
           </div>
-        
+
         </div>
       </div>
     </div>
@@ -90,8 +93,8 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script>
       $(document).ready(function () {
-        
-        $(".preview").click(function() {
+
+        $(".preview").click(function () {
           var link = $(this).parents(".card").find("img").attr("src");
           $("#preview").attr("src", link);
         });

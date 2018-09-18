@@ -68,13 +68,14 @@ namespace Matlab.Api.Controllers
                 }
 
                 var result = category.Packages.Select(x => new PackageMinimalViewModel(x)).ToList();
-                LogThis.BaseLog(Request, LogLevel.Info, Actions.PackagesOfCategoryRequested, new Dictionary<LogProperties, object>
-                {
-                    {LogProperties.Id, model.Id},
-                    {LogProperties.Count,result.Count },
-                    {LogProperties.Message,ErrorMessages.Successful }
+                LogThis.BaseLog(Request, LogLevel.Info, Actions.PackagesOfCategoryRequested,
+                    new Dictionary<LogProperties, object>
+                    {
+                        {LogProperties.Id, model.Id},
+                        {LogProperties.Count, result.Count},
+                        {LogProperties.Message, ErrorMessages.Successful}
 
-                });
+                    });
                 return Tools.ResponseMessage.OkWithResult(result);
             }
             catch (Exception e)
@@ -112,37 +113,44 @@ namespace Matlab.Api.Controllers
             }
         }
 
-        //[HttpPost]
-        //public async Task<ResponseMessage> PackageBoxes(IdRequestViewModel model)
-        //{
-        //    try
-        //    {
-        //        var userId = User.Identity.GetUserId();
-        //        var user = await UserManager.FindByIdAsync(userId);
-        //        var userPackage = user.UserPackages.FirstOrDefault(x => x.PackageId == model.Id && x.UserId == userId);
-        //        if (userPackage == null)
-        //        {
-        //            LogThis.BaseLog(Request, LogLevel.Warn, Actions.PackageBoxesRequested, new Dictionary<LogProperties, object>
-        //            {
-        //                {LogProperties.Id, model.Id},
-        //                {LogProperties.Message,ErrorMessages.UserPackageNotFound }
-        //            });
-        //            return new ResponseMessage(Tools.ResponseMessage.ResponseCode.NotFound, ErrorMessages.UserPackageNotFound);
-        //        }
+        [HttpPost]
+        public async Task<ResponseMessage> UserPackageBoxes(IdRequestViewModel model)
+        {
+            try
+            {
+                var package = await db.Packages.FindAsync(model.Id);
+                if (package == null)
+                {
+                    LogThis.BaseLog(Request, LogLevel.Warn, Actions.PackageBoxesRequested, new Dictionary<LogProperties, object>
+                    {
+                        {LogProperties.Id, model.Id},
+                        {LogProperties.Message,ErrorMessages.PackageNotFound }
+                    });
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.NotFound, ErrorMessages.PackageNotFound);
+                }
 
-        //        var package = userPackage.Package;
-                
+                var userId = User.Identity.GetUserId();
+                var packageBoxes = package.Boxes.Select(x=>new UserBoxMinimalViewModel(x,userId)).ToList();
+                LogThis.BaseLog(Request, LogLevel.Info, Actions.PackageBoxesRequested, new Dictionary<LogProperties, object>
+                {
+                    {LogProperties.Id, model.Id},
+                    {LogProperties.Message,ErrorMessages.Successful },
+                    {LogProperties.Count,packageBoxes.Count }
+                });
+                return Tools.ResponseMessage.OkWithResult(packageBoxes);
 
 
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        LogThis.BaseLog(Request, LogLevel.Error, Actions.CategoriesRequested, new Dictionary<LogProperties, object>
-        //        {
-        //            {LogProperties.Error,e }
-        //        });
-        //        return Tools.ResponseMessage.InternalError;
-        //    }
-        //}
+            }
+            catch (Exception e)
+            {
+                LogThis.BaseLog(Request, LogLevel.Error, Actions.CategoriesRequested, new Dictionary<LogProperties, object>
+                {
+                    {LogProperties.Error,e }
+                });
+                return Tools.ResponseMessage.InternalError;
+            }
+        }
+
+
     }
 }

@@ -19,12 +19,15 @@
         <h1>بررسی جستار های پیشنهادی</h1><br />
         <h5>متن اصلی</h5>
         <p>@Model.Title</p>
-        <h5>سوال</h5>
-        <p>@Model.Question.Title</p>
-        <h5>جواب</h5>
-        @foreach (Answer answer in Model.Question.Answers)
+        @foreach (Question question in Model.Questions)
         {
-          <p>@answer.Text</p>
+          <h5>سوال</h5>
+          <p>@question.Title</p>
+          <h5>جواب</h5>
+          foreach (Answer answer in question.Answers)
+          {
+            <p>@answer.Text</p>
+          }
         }
 
         @using (Html.BeginForm("SetExternalLink", "ExternalArticle", FormMethod.Post))
@@ -38,7 +41,7 @@
                   <div class="form-check-inline">
                     <label class="form-check-label ">
                       <input type="checkbox" class="form-check-input " name="links" value="@article.Id">
-                      <a href="@article.Url" >@article.Title</a>
+                      <a href="@article.Url">@article.Title</a>
                     </label>
                   </div>
                 </div>

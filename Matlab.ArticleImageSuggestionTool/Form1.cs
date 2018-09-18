@@ -96,11 +96,14 @@ namespace Matlab.ArticleImageSuggestionTool
             if (article != null)
             {
                 textBoxArticleTitle.Text = article.Title;
-                textBoxQuestionTitle.Text = article.Question.Title + Environment.NewLine;
-                foreach (Answer answer in article.Question.Answers)
-                {
-                    textBoxQuestionTitle.Text += answer.Text + Environment.NewLine;
-                }
+                textBoxQuestionTitle.Text = article.Questions.FirstOrDefault()?.Title + Environment.NewLine;
+                var collection = article.Questions.FirstOrDefault()?.Answers;
+                if (collection != null)
+                    foreach (Answer answer in collection)
+                    {
+                        textBoxQuestionTitle.Text += answer.Text + Environment.NewLine;
+                    }
+
                 labelCategory.Text = article.Box.Package.Catergory.Title;
                 labelPackage.Text = article.Box.Package.Title;
                 _currentArticleId = article.Id;

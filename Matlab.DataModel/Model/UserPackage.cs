@@ -5,6 +5,13 @@ namespace Matlab.DataModel
 {
     public class UserPackage
     {
+        public UserPackage()
+        {
+            if (UserPackageBoxes==null)
+            {
+                UserPackageBoxes=new List<UserPackageBox>();
+            }
+        }
         public int Id { get; set; }
         public int PackageId { get; set; }
         [JsonIgnore]

@@ -1,4 +1,7 @@
-﻿namespace Matlab.DataModel
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace Matlab.DataModel
 {
     public class UserPackageBox
     {
@@ -7,8 +10,9 @@
         public int BoxId { get; set; }
         public BoxState State { get; set; }
         public int StateValue { get; set; }
-
+        [JsonIgnore]
         public virtual UserPackage UserPackage { get; set; }
+        [JsonIgnore]
         public virtual Box Box { get; set; }
 
     }

@@ -61,6 +61,33 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مطلب برای اولین بار خوانده شد و مقدار وضعیت تغییر کرد.
+        /// </summary>
+        internal static string ArticleLearned {
+            get {
+                return ResourceManager.GetString("ArticleLearned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to باز خوانی مطلب انجام شد.
+        /// </summary>
+        internal static string ArticleLearnRepeated {
+            get {
+                return ResourceManager.GetString("ArticleLearnRepeated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مطلب مورد نظر یافت نشد.
+        /// </summary>
+        internal static string ArticleNotFound {
+            get {
+                return ResourceManager.GetString("ArticleNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to محتوای عکس خالیست.
         /// </summary>
         internal static string ImageEmpty {
@@ -151,6 +178,15 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بسته مورد نظر یافت نشد.
+        /// </summary>
+        internal static string PackageNotFound {
+            get {
+                return ResourceManager.GetString("PackageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کاراکتر های نامعتبر در رمز عبور.
         /// </summary>
         internal static string PasswordInvalidCharacter {
@@ -219,6 +255,51 @@ namespace Matlab.Api.Tools {
         internal static string Successful {
             get {
                 return ResourceManager.GetString("Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to وضعیت جعبه کاربر تغییر کرد.
+        /// </summary>
+        internal static string UserBoxStateChanged {
+            get {
+                return ResourceManager.GetString("UserBoxStateChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مقدار وضعیت جعبه کاربر تغییر کرد.
+        /// </summary>
+        internal static string UserBoxStateValueChange {
+            get {
+                return ResourceManager.GetString("UserBoxStateValueChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کاربر مالک این جعبه نیست.
+        /// </summary>
+        internal static string UserNotOwnedBox {
+            get {
+                return ResourceManager.GetString("UserNotOwnedBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to جعبه کاربر مورد نظر برای کاربر تعریف نشده است.
+        /// </summary>
+        internal static string UserPackageBoxNotFound {
+            get {
+                return ResourceManager.GetString("UserPackageBoxNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ابتدا یادگیری بسته را به اتمام برسانید.
+        /// </summary>
+        internal static string UserPackageBoxNotLearned {
+            get {
+                return ResourceManager.GetString("UserPackageBoxNotLearned", resourceCulture);
             }
         }
         

@@ -70,6 +70,33 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to وضعیت جعبه تغییر کرد.
+        /// </summary>
+        internal static string ChangeBoxState {
+            get {
+                return ResourceManager.GetString("ChangeBoxState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مقدار مضعیت جعبه تغییر کرد.
+        /// </summary>
+        internal static string ChangeBoxStateValue {
+            get {
+                return ResourceManager.GetString("ChangeBoxStateValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کاربر مطلب را مطالعه کرد.
+        /// </summary>
+        internal static string LearnedArticle {
+            get {
+                return ResourceManager.GetString("LearnedArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to دریافت جعبه های بسته.
         /// </summary>
         internal static string PackageBoxesRequested {
@@ -93,6 +120,33 @@ namespace Matlab.Api.Tools {
         internal static string PackagesOfUserRequested {
             get {
                 return ResourceManager.GetString("PackagesOfUserRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دریافت مطالب جعبه کاربر.
+        /// </summary>
+        internal static string UserPackageBoxArticlesRequested {
+            get {
+                return ResourceManager.GetString("UserPackageBoxArticlesRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دریافت جعبه های بسته کاربر.
+        /// </summary>
+        internal static string UserPackageBoxesRequested {
+            get {
+                return ResourceManager.GetString("UserPackageBoxesRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دریافت سوالات جعبه کاربر.
+        /// </summary>
+        internal static string UserPackageBoxQuestionsRequested {
+            get {
+                return ResourceManager.GetString("UserPackageBoxQuestionsRequested", resourceCulture);
             }
         }
     }

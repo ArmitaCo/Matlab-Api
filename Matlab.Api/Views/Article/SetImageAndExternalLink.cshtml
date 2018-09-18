@@ -1,0 +1,176 @@
+﻿@using Matlab.DataModel
+@model Matlab.DataModel.Article
+
+@{
+  Layout = "";
+}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  @Styles.Render("~/Content/css")
+  @Scripts.Render("~/bundles/modernizr")
+
+  <title>افزودن عکس پیشنهادی</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>انتخاب عکس</h1><br />
+        <h5>متن اصلی</h5>
+        <p>@Model.Id .@Model.Title</p>
+        @foreach (Question question in Model.Questions)
+        {
+          <h5>سوال</h5>
+          <p>@question.Title</p>
+          <h5>جواب</h5>
+          foreach (Answer answer in question.Answers)
+          {
+            <p>@answer.Text</p>
+          }
+        }
+
+        @using (Html.BeginForm("SetImageAndExternalLink", "Article", FormMethod.Post))
+        {
+          <input type="hidden" name="id1" value="@Model.Id" />
+          if (string.IsNullOrWhiteSpace(Model.ImageUrl))
+          {
+            <div class="card-deck">
+
+              @foreach (ImageSuggest suggest in Model.ImageSuggests)
+              {
+                <div class="card ">
+                  <div class="card-body text-center">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="id2" value="@suggest.Id" ><img src="@suggest.AbsoluteImageUrl" class="img-thumbnail" />
+                      </label>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" class="btn-block previewimage" data-toggle="modal" data-target="#myModalImage">پیش نمایش</a>
+                  </div>
+                </div>
+
+
+              }
+
+
+
+            </div>
+            <button class="btn btn-default btn-block btn-lg">ثبت</button>
+
+          }
+          <hr />
+          if (Model.ExternalArticles.Any(x => x.State == ExternalArticleState.Suggested))
+          {
+
+
+            <div class="card-deck">
+
+              @foreach (ExternalArticle article in Model.ExternalArticles.Where(x => x.State == ExternalArticleState.Suggested))
+              {
+                <div class="card ">
+                  <div class="card-body text-right">
+                    <div class="form-check-inline">
+                      <label class="form-check-label ">
+                        <input type="checkbox" class="form-check-input " name="links" value="@article.Id">
+                        <a href="@article.Url">@article.Title</a>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="container">
+                      <a href="#" class="btn btn-primary btn-block previewlink" data-toggle="modal" data-target="#myModalLink">پیش نمایش</a>
+                      <a href="@article.Url" target="_blank" class="btn btn-secondary btn-block">باز کردن</a>
+                    </div>
+                  </div>
+                </div>
+
+
+              }
+
+
+            </div>
+            <button name="state" class="btn btn-success btn-lg" type="submit" value="@ExternalArticleState.Approved">تایید</button>
+            <button name="state" class="btn btn-danger btn-lg" type="submit" value="@ExternalArticleState.Denied">حذف</button>
+            <button name="state" class="btn btn-warning btn-lg" type="submit" value="@ExternalArticleState.Crupted">مخدوش</button>
+          }
+          <br />
+
+        }
+      </div>
+
+    </div>
+
+    <div class="modal" id="myModalImage">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">پیش نمایش عکس</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="container-fluid">
+              <img id="previewimage" class="col-12" />
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="myModalLink">
+      <div class="modal-dialog modal-lg h-75">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">پیش نمایش لینک</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="container-fluid h-75">
+              <embed id="previewlink" class="col-12 h-100" />
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+      $(document).ready(function () {
+
+        $(".previewimage").click(function () {
+          var link = $(this).parents(".card").find("img").attr("src");
+          $("#previewimage").attr("src", link);
+        });
+        $(".previewlink").click(function () {
+          var link = $(this).parents(".card").find("a")[0];
+          $("#previewlink").attr("src", link);
+        });
+      });
+    </script>
+  </div>
+</body>
+

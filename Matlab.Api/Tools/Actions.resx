@@ -129,4 +129,22 @@
   <data name="PackagesOfUserRequested" xml:space="preserve">
     <value>دریافت بسته های کاربر</value>
   </data>
+  <data name="UserPackageBoxArticlesRequested" xml:space="preserve">
+    <value>دریافت مطالب جعبه کاربر</value>
+  </data>
+  <data name="UserPackageBoxesRequested" xml:space="preserve">
+    <value>دریافت جعبه های بسته کاربر</value>
+  </data>
+  <data name="UserPackageBoxQuestionsRequested" xml:space="preserve">
+    <value>دریافت سوالات جعبه کاربر</value>
+  </data>
+  <data name="ChangeBoxState" xml:space="preserve">
+    <value>وضعیت جعبه تغییر کرد</value>
+  </data>
+  <data name="LearnedArticle" xml:space="preserve">
+    <value>کاربر مطلب را مطالعه کرد</value>
+  </data>
+  <data name="ChangeBoxStateValue" xml:space="preserve">
+    <value>مقدار مضعیت جعبه تغییر کرد</value>
+  </data>
 </root>

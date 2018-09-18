@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Matlab.DataModel;
@@ -84,10 +84,10 @@ namespace MigrateDataFromOldDbToMatlabDb
                     package.Boxes.Add(box);
                     _matlabDb.SaveChanges();
                 }
-                else if (boxes.All(x => x.Articles.Count == 5))
+                else if (boxes.All(x => x.Articles.Count == Defaults.BoxMaxArticles))
                 {
                     int code = boxes.Max(x => x.Code) + 1;
-                    box=new Box()
+                    box = new Box()
                     {
                         Code = code
                     };
@@ -96,10 +96,10 @@ namespace MigrateDataFromOldDbToMatlabDb
                 }
                 else
                 {
-                    box = boxes.Single(x => x.Articles.Count < 5);
+                    box = boxes.Single(x => x.Articles.Count < Defaults.BoxMaxArticles);
                 }
                 string baseQuestion = itemContent.question.Replace("- ", "").Replace("\r\n", "");
-                string[] questionParts = baseQuestion.Split(new String[] { "11", "12", "13", "14" },
+                string[] questionParts = baseQuestion.Split(new String[] { "11", "12", "13", "14" ,"الف" },
                     StringSplitOptions.RemoveEmptyEntries);
                 string questionText = questionParts[0];
 
@@ -123,13 +123,15 @@ namespace MigrateDataFromOldDbToMatlabDb
                     Title = itemContent.context,
                     Box = box,
                     Order = itemContent.code,
-                    Question = new Question()
+                    Questions = new List<Question>()
                     {
+                        new Question(){
                         Title = questionText,
                         CorrectChoiceLable = (ChoiceLable)(int.Parse(itemContent.answer) - 11),
                         Answers = answersList,
                         AnswersCount = (int)itemContent.optionCount,
                         AnswersString = answerString,
+                            }
                     }
 
                 };
@@ -138,6 +140,13 @@ namespace MigrateDataFromOldDbToMatlabDb
 
             }
 
+            _matlabDb.SaveChanges();
+
+            var answers = _matlabDb.Answers.Where(x => x.Question.CorrectChoiceLable == x.ChoiceLable);
+            foreach (var answer in answers)
+            {
+                answer.IsCorrect = true;
+            }
             _matlabDb.SaveChanges();
         }
     }

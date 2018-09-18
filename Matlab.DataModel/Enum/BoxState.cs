@@ -3,10 +3,8 @@
     public enum BoxState
     {
         NotOwned,
-        JustOwned,
-        Learned,
         Learning,
-        Examed,
-        Examing
+        Examing,
+        Finished,
     }
 }

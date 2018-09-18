@@ -69,6 +69,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,16 +78,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201808271304397_test.cs" />
-    <Compile Include="Migrations\201808271304397_test.Designer.cs">
-      <DependentUpon>201808271304397_test.cs</DependentUpon>
+    <Compile Include="Defaults.cs" />
+    <Compile Include="Migrations\201809081142238_test1.cs" />
+    <Compile Include="Migrations\201809081142238_test1.Designer.cs">
+      <DependentUpon>201809081142238_test1.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ApplicationUser.cs" />
     <Compile Include="MatlabDb.cs" />
-    <Compile Include="Migrations\201808110936588_InitialCreate.cs" />
-    <Compile Include="Migrations\201808110936588_InitialCreate.Designer.cs">
-      <DependentUpon>201808110936588_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Answer.cs" />
     <Compile Include="Model\Box.cs" />
@@ -108,8 +106,14 @@
     <Compile Include="ViewModel\AccountBindingModels.cs" />
     <Compile Include="ViewModel\AccountViewModels.cs" />
     <Compile Include="Enum\BoxState.cs" />
+    <Compile Include="ViewModel\AnswerMinimalViewModel.cs" />
+    <Compile Include="ViewModel\ArticleMinimalViewModel.cs" />
     <Compile Include="ViewModel\IdRequestViewModel.cs" />
+    <Compile Include="ViewModel\LearningViewModel.cs" />
     <Compile Include="ViewModel\PackageMinimalViewModel.cs" />
+    <Compile Include="ViewModel\QuestionMinimalViewModel.cs" />
+    <Compile Include="ViewModel\TwoIdRequestViewModel.cs" />
+    <Compile Include="ViewModel\UserBoxMinimalViewModel.cs" />
     <Compile Include="ViewModel\UserPackageMinimalViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,11 +121,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808110936588_InitialCreate.resx">
-      <DependentUpon>201808110936588_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808271304397_test.resx">
-      <DependentUpon>201808271304397_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809081142238_test1.resx">
+      <DependentUpon>201809081142238_test1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
