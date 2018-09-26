@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Web.Http.ModelBinding;
 
 namespace Matlab.Api.Tools
@@ -33,19 +35,21 @@ namespace Matlab.Api.Tools
         public ResponseMessageDetail(ResponseMessage.ResponseCode code, string message, object result = null)
         {
             Code = code;
-            
+            List<string> r=new List<string>();
             if (result?.GetType() == typeof(ModelStateDictionary))
             {
-                foreach (var item in (ModelStateDictionary)result)
+                foreach (var item in ((ModelStateDictionary)result).Values.SelectMany(x=>x.Errors))
                 {
-                    message += $"{item.Key} : {item.Value}\n";
+                    r.Add(item.ErrorMessage);
                 }
+
+                Result = r;
             }
             else
             {
-                Message = message;
                 Result = result;
             }
+            Message = message;
         }
 
         //public static readonly ResponseMessageDetail InternalError =
