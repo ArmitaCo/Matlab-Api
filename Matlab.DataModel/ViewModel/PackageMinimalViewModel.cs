@@ -1,4 +1,6 @@
-﻿namespace Matlab.DataModel
+﻿using System.Linq;
+
+namespace Matlab.DataModel
 {
     public class PackageMinimalViewModel
     {
@@ -8,13 +10,15 @@
         public string ImageUrl { get; set; }
         public string CoverUrl { get; set; }
         public int CategoryId { get; set; }
+        public UserPackageState UserPackageState { get; set; }
+        public int? UserPackageId { get; set; }
 
         public PackageMinimalViewModel()
         {
             
         }
 
-        public PackageMinimalViewModel(Package package)
+        public PackageMinimalViewModel(Package package,string userId)
         {
             Id = package.Id;
             Title = package.Title;
@@ -22,6 +26,9 @@
             ImageUrl = package.AbsoluteImageUrl;
             CoverUrl = package.AbsoluteCoverUrl;
             CategoryId = package.CategoryId;
+            var userPackage= package.UserPackages.FirstOrDefault(x => x.UserId == userId);
+            UserPackageState = userPackage?.UserPackageState ?? UserPackageState.NotOwned;
+            UserPackageId = userPackage?.Id;
         }
     }
 }

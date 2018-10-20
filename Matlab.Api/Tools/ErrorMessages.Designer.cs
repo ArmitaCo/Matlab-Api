@@ -61,6 +61,15 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to پاسخ یافت نشد.
+        /// </summary>
+        internal static string AnswerNotFound {
+            get {
+                return ResourceManager.GetString("AnswerNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مطلب برای اولین بار خوانده شد و مقدار وضعیت تغییر کرد.
         /// </summary>
         internal static string ArticleLearned {
@@ -84,6 +93,24 @@ namespace Matlab.Api.Tools {
         internal static string ArticleNotFound {
             get {
                 return ResourceManager.GetString("ArticleNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نماد یافت نشد.
+        /// </summary>
+        internal static string AvatarImageNotFound {
+            get {
+                return ResourceManager.GetString("AvatarImageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پاسخ کاربر صحیح بود.
+        /// </summary>
+        internal static string CorrectAnswer {
+            get {
+                return ResourceManager.GetString("CorrectAnswer", resourceCulture);
             }
         }
         
@@ -178,6 +205,15 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to جعبه بسته پیدا نشد.
+        /// </summary>
+        internal static string PackageBoxNotFound {
+            get {
+                return ResourceManager.GetString("PackageBoxNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to بسته مورد نظر یافت نشد.
         /// </summary>
         internal static string PackageNotFound {
@@ -210,6 +246,24 @@ namespace Matlab.Api.Tools {
         internal static string PasswordInvalidMatch {
             get {
                 return ResourceManager.GetString("PasswordInvalidMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to سوال پیدا نشد.
+        /// </summary>
+        internal static string QuestionNotFound {
+            get {
+                return ResourceManager.GetString("QuestionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to سوال مربوط به این جعبه نیست.
+        /// </summary>
+        internal static string QuestionNotInThisBox {
+            get {
+                return ResourceManager.GetString("QuestionNotInThisBox", resourceCulture);
             }
         }
         
@@ -259,6 +313,15 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کاربر قبلا به این سوال پاسخ داده است.
+        /// </summary>
+        internal static string UserAnswerdBefore {
+            get {
+                return ResourceManager.GetString("UserAnswerdBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to وضعیت جعبه کاربر تغییر کرد.
         /// </summary>
         internal static string UserBoxStateChanged {
@@ -304,11 +367,29 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to وضعیت جعبه کاربر مناسب این عملیات نیست.
+        /// </summary>
+        internal static string UserPackageBoxStateIncorrect {
+            get {
+                return ResourceManager.GetString("UserPackageBoxStateIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to بسته مورد نظر برای کاربر تعریف نشده است.
         /// </summary>
         internal static string UserPackageNotFound {
             get {
                 return ResourceManager.GetString("UserPackageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پاسخ کاربر غلط بود.
+        /// </summary>
+        internal static string WrongAnswer {
+            get {
+                return ResourceManager.GetString("WrongAnswer", resourceCulture);
             }
         }
     }

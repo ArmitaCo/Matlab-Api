@@ -5,7 +5,7 @@ namespace Matlab.DataModel
 {
     public class ImageSuggest
     {
-        private static string _baseUrl = "http://31.25.130.239/Images/Articles/";
+        private static string _baseUrl = "http://mohsenmeshkini.ir/Images/Articles/";
         public int Id { get; set; }
         public int ArticleId { get; set; }
         [JsonIgnore]

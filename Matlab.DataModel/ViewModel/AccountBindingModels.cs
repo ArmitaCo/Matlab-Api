@@ -36,6 +36,7 @@ namespace Matlab.DataModel
     {
         [Required]
         [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
@@ -54,6 +55,7 @@ namespace Matlab.DataModel
     {
         [Required]
         [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }
 

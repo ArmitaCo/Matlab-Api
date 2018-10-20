@@ -45,7 +45,7 @@ namespace Matlab.ArticleImageSuggestionTool
         }
         private void  Upload(int articleId, FileStream paramFileStream)
         {
-            string actionUrl = "http://31.25.130.239/api/articles/addImage";
+            string actionUrl = "http://mohsenmeshkini.ir/api/articles/addImage";
             HttpContent stringContent = new StringContent(articleId.ToString());
             HttpContent fileStreamContent = new StreamContent(paramFileStream);
             //HttpContent bytesContent = new ByteArrayContent(paramFileBytes);

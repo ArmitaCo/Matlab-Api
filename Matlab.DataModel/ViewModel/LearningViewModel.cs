@@ -2,7 +2,7 @@
 {
     public class LearningViewModel
     {
-        public int UserBoxId { get; set; }
+        public int BoxId { get; set; }
         public int Order { get; set; }
     }
 }

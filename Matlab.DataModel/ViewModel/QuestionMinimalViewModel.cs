@@ -11,13 +11,15 @@ namespace Matlab.DataModel
         public string AnswersText { get; set; }
         public ICollection<AnswerMinimalViewModel> Answers { get; set; }
         public int AnswersCount { get; set; }
+        public int? UserAnswerId { get; set; }
+        public string Hint { get; set; }
 
         public QuestionMinimalViewModel()
         {
             
         }
 
-        public QuestionMinimalViewModel(Question model)
+        public QuestionMinimalViewModel(Question model, string userId)
         {
             Id = model.Id;
             QuestionText = model.Title;
@@ -25,6 +27,8 @@ namespace Matlab.DataModel
             AnswersText = model.AnswersString;
             AnswersCount = model.AnswersCount;
             Answers = model.Answers.Select(x => new AnswerMinimalViewModel(x)).ToList();
+            UserAnswerId = model.UserAnswers.FirstOrDefault(x => x.UserId == userId)?.AnswerId;
+            Hint = model.Article.Title;
         }
     }
 }

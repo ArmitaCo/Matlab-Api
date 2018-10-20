@@ -201,4 +201,31 @@
   <data name="UserPackageNotFound" xml:space="preserve">
     <value>بسته مورد نظر برای کاربر تعریف نشده است</value>
   </data>
+  <data name="AnswerNotFound" xml:space="preserve">
+    <value>پاسخ یافت نشد</value>
+  </data>
+  <data name="UserPackageBoxStateIncorrect" xml:space="preserve">
+    <value>وضعیت جعبه کاربر مناسب این عملیات نیست</value>
+  </data>
+  <data name="CorrectAnswer" xml:space="preserve">
+    <value>پاسخ کاربر صحیح بود</value>
+  </data>
+  <data name="PackageBoxNotFound" xml:space="preserve">
+    <value>جعبه بسته پیدا نشد</value>
+  </data>
+  <data name="QuestionNotFound" xml:space="preserve">
+    <value>سوال پیدا نشد</value>
+  </data>
+  <data name="UserAnswerdBefore" xml:space="preserve">
+    <value>کاربر قبلا به این سوال پاسخ داده است</value>
+  </data>
+  <data name="WrongAnswer" xml:space="preserve">
+    <value>پاسخ کاربر غلط بود</value>
+  </data>
+  <data name="QuestionNotInThisBox" xml:space="preserve">
+    <value>سوال مربوط به این جعبه نیست</value>
+  </data>
+  <data name="AvatarImageNotFound" xml:space="preserve">
+    <value>نماد یافت نشد</value>
+  </data>
 </root>

@@ -8,6 +8,7 @@ using System.Web.Http;
 using Matlab.Api.Tools;
 using Matlab.DataModel;
 using Matlab.Logger;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace Matlab.Api.Controllers
@@ -60,7 +61,7 @@ namespace Matlab.Api.Controllers
                                 {LogProperties.Message, ErrorMessages.Successful},
                                 {LogProperties.Count, userPackageBox.Box.Articles.Count}
                             });
-                        return Tools.ResponseMessage.OkWithResult(userPackageBox.Box.Articles.SelectMany(x=>x.Questions).Select(x => new QuestionMinimalViewModel(x)));
+                        return Tools.ResponseMessage.OkWithResult(userPackageBox.Box.Articles.SelectMany(x => x.Questions).Select(x => new QuestionMinimalViewModel(x, User.Identity.GetUserId())));
                 }
             }
             catch (Exception e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -17,6 +18,7 @@ using Matlab.Api.Providers;
 using Matlab.Api.Results;
 using Matlab.Api.Tools;
 using Matlab.DataModel;
+using Matlab.Logger;
 
 namespace Matlab.Api.Controllers
 {
@@ -26,10 +28,12 @@ namespace Matlab.Api.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
-
+        MatlabDb db = new MatlabDb();
         public AccountController()
         {
         }
+
+        
 
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
@@ -69,7 +73,7 @@ namespace Matlab.Api.Controllers
                     LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
                 });
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return Tools.ResponseMessage.InternalError;
             }
@@ -85,7 +89,7 @@ namespace Matlab.Api.Controllers
                 Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
                 return Tools.ResponseMessage.Ok;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return Tools.ResponseMessage.InternalError;
             }
@@ -133,7 +137,7 @@ namespace Matlab.Api.Controllers
                     ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
                 });
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return Tools.ResponseMessage.InternalError;
             }
@@ -148,7 +152,7 @@ namespace Matlab.Api.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, ModelState); 
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, ModelState);
                 }
 
                 IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
@@ -183,7 +187,7 @@ namespace Matlab.Api.Controllers
 
                 if (!result.Succeeded)
                 {
-                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError,result);
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, result);
                 }
 
                 return Tools.ResponseMessage.Ok;
@@ -203,7 +207,7 @@ namespace Matlab.Api.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError,ModelState); ;
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, ModelState); ;
                 }
 
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
@@ -214,7 +218,7 @@ namespace Matlab.Api.Controllers
                     && ticket.Properties.ExpiresUtc.HasValue
                     && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
                 {
-                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed,"ورود خارجی ناموفق"); ;
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, "ورود خارجی ناموفق"); ;
 
                 }
 
@@ -222,7 +226,7 @@ namespace Matlab.Api.Controllers
 
                 if (externalData == null)
                 {
-                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed,"The external login is already associated with an account.");
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, "The external login is already associated with an account.");
                 }
 
                 IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
@@ -230,7 +234,7 @@ namespace Matlab.Api.Controllers
 
                 if (!result.Succeeded)
                 {
-                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed,ErrorMessages.RegisterError, result);
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, result);
                 }
 
                 return Tools.ResponseMessage.Ok;
@@ -267,7 +271,7 @@ namespace Matlab.Api.Controllers
 
                 if (!result.Succeeded)
                 {
-                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError,result);
+                    return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, result);
                 }
 
                 return Tools.ResponseMessage.Ok;
@@ -400,7 +404,7 @@ namespace Matlab.Api.Controllers
 
             if (!result.Succeeded)
             {
-                return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed,ErrorMessages.RegisterError,result.Errors);
+                return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, result.Errors);
             }
 
             return Tools.ResponseMessage.Ok;

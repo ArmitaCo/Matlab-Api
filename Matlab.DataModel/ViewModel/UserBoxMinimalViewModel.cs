@@ -5,6 +5,7 @@ namespace Matlab.DataModel
     public class UserBoxMinimalViewModel
     {
         public int Id { get; set; }
+        public int? UserPackageBoxId { get; set; }
         public int PackageId { get; set; }
         public int Code { get; set; }
         public BoxState BoxState { get; set; }
@@ -22,16 +23,17 @@ namespace Matlab.DataModel
             PackageId = box.PackageId;
             Code = box.Code;
             Title = box.Title;
-            var upb = box.UserPackageBoxes.FirstOrDefault(x => x.UserPackage.UserId == userId);
-            if (upb==null)
+            var userPackageBox = box.UserPackageBoxes.FirstOrDefault(x => x.UserPackage.UserId == userId);
+            if (userPackageBox==null)
             {
                 BoxState = BoxState.NotOwned;
                 StateValue = 0;
             }
             else
             {
-                BoxState = upb.State;
-                StateValue = upb.StateValue;
+                BoxState = userPackageBox.State;
+                StateValue = userPackageBox.StateValue;
+                UserPackageBoxId = userPackageBox.Id;
             }
         }
     }

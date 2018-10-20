@@ -54,6 +54,7 @@ namespace Matlab.Api.Controllers
         public async Task<ResponseMessage> Packages(IdRequestViewModel model)
         {
             string ip = StaticTools.GetIp(Request);
+            string userId = User.Identity.GetUserId();
             try
             {
                 var category = await db.Catergories.FindAsync(model.Id);
@@ -67,7 +68,7 @@ namespace Matlab.Api.Controllers
                     return new ResponseMessage(Tools.ResponseMessage.ResponseCode.NotFound, ErrorMessages.RequestedCategoryNotFound);
                 }
 
-                var result = category.Packages.Select(x => new PackageMinimalViewModel(x)).ToList();
+                var result = category.Packages.Select(x => new PackageMinimalViewModel(x,userId)).ToList();
                 LogThis.BaseLog(Request, LogLevel.Info, Actions.PackagesOfCategoryRequested,
                     new Dictionary<LogProperties, object>
                     {
@@ -101,7 +102,32 @@ namespace Matlab.Api.Controllers
                     {LogProperties.Count, userPackages?.Count},
                     {LogProperties.Message,ErrorMessages.Successful}
                 });
-                return Tools.ResponseMessage.OkWithResult(userPackages?.Select(x => new UserPackageMinimalViewModel(x)));
+                return Tools.ResponseMessage.OkWithResult(userPackages?.Select(x => new UserPackageMinimalViewModel(x,userId)));
+            }
+            catch (Exception e)
+            {
+                LogThis.BaseLog(Request, LogLevel.Error, Actions.CategoriesRequested, new Dictionary<LogProperties, object>
+                {
+                    {LogProperties.Error,e }
+                });
+                return Tools.ResponseMessage.InternalError;
+            }
+        }
+
+        [HttpPost]
+        public async Task<ResponseMessage> MyPackages2()
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                var user = await UserManager.FindByIdAsync(userId);
+                var userPackages = user.UserPackages;
+                LogThis.BaseLog(Request, LogLevel.Info, Actions.PackagesOfUserRequested, new Dictionary<LogProperties, object>
+                {
+                    {LogProperties.Count, userPackages?.Count},
+                    {LogProperties.Message,ErrorMessages.Successful}
+                });
+                return Tools.ResponseMessage.OkWithResult(userPackages?.Select(x => new UserPackageMinimalViewModel2(x)));
             }
             catch (Exception e)
             {
@@ -116,6 +142,9 @@ namespace Matlab.Api.Controllers
         [HttpPost]
         public async Task<ResponseMessage> UserPackageBoxes(IdRequestViewModel model)
         {
+
+            var z = UserManager.GenerateUserToken("sss", User.Identity.GetUserId());
+            
             try
             {
                 var package = await db.Packages.FindAsync(model.Id);

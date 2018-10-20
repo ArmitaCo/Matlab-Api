@@ -61,6 +61,15 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کاربر به سوال پاسخ داد.
+        /// </summary>
+        internal static string AnsweredArticle {
+            get {
+                return ResourceManager.GetString("AnsweredArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to دریافت دسته بندی ها.
         /// </summary>
         internal static string CategoriesRequested {
@@ -120,6 +129,42 @@ namespace Matlab.Api.Tools {
         internal static string PackagesOfUserRequested {
             get {
                 return ResourceManager.GetString("PackagesOfUserRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دریافت اطلاعات پروفایل.
+        /// </summary>
+        internal static string ProfileDataRequested {
+            get {
+                return ResourceManager.GetString("ProfileDataRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دریافت راهنمای سوال.
+        /// </summary>
+        internal static string QuestionHintRequested {
+            get {
+                return ResourceManager.GetString("QuestionHintRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to سوال دیده شد.
+        /// </summary>
+        internal static string QuestionViewdRequested {
+            get {
+                return ResourceManager.GetString("QuestionViewdRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تغییر نماد کاربر.
+        /// </summary>
+        internal static string SetAvatarRequested {
+            get {
+                return ResourceManager.GetString("SetAvatarRequested", resourceCulture);
             }
         }
         

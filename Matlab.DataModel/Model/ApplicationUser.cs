@@ -18,9 +18,12 @@ namespace Matlab.DataModel
             return userIdentity;
         }
 
+        public int? AvatarImageId { get; set; }
+        public virtual AvatarImage AvatarImage { get; set; }
         public virtual ICollection<UserPackage> UserPackages { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ICollection<ExternalArticle> ExternalArticles { get; set; }
+        public virtual ICollection<UserAnswer> UserAnswers { get; set; }
     }
 }

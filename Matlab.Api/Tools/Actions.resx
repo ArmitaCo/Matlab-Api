@@ -147,4 +147,19 @@
   <data name="ChangeBoxStateValue" xml:space="preserve">
     <value>مقدار مضعیت جعبه تغییر کرد</value>
   </data>
+  <data name="AnsweredArticle" xml:space="preserve">
+    <value>کاربر به سوال پاسخ داد</value>
+  </data>
+  <data name="QuestionHintRequested" xml:space="preserve">
+    <value>دریافت راهنمای سوال</value>
+  </data>
+  <data name="QuestionViewdRequested" xml:space="preserve">
+    <value>سوال دیده شد</value>
+  </data>
+  <data name="ProfileDataRequested" xml:space="preserve">
+    <value>دریافت اطلاعات پروفایل</value>
+  </data>
+  <data name="SetAvatarRequested" xml:space="preserve">
+    <value>تغییر نماد کاربر</value>
+  </data>
 </root>

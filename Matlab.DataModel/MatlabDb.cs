@@ -18,6 +18,8 @@ namespace Matlab.DataModel
         public virtual DbSet<ExternalArticle> ExternalArticles { get; set; }
         public virtual DbSet<Box> Boxes { get; set; }
         public virtual DbSet<UserPackageBox> UserPackageBoxes { get; set; }
+        public virtual DbSet<UserAnswer> UserAnswers { get; set; }
+        public virtual DbSet<AvatarImage> AvatarImages { get; set; }
 
         #region Overrides of IdentityDbContext<ApplicationUser,IdentityRole,string,IdentityUserLogin,IdentityUserRole,IdentityUserClaim>
 
@@ -111,8 +113,31 @@ namespace Matlab.DataModel
                 .WithRequired(x => x.Box)
                 .HasForeignKey(x => x.BoxId);
 
-            
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(x => x.UserAnswers)
+                .WithRequired(x => x.User)
+                .HasForeignKey(x => x.UserId);
 
+            modelBuilder.Entity<Answer>()
+                .HasMany(x => x.UserAnswers)
+                .WithRequired(x => x.Answer)
+                .HasForeignKey(x => x.AnswerId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Question>()
+                .HasMany(x => x.UserAnswers)
+                .WithRequired(x => x.Question)
+                .HasForeignKey(x => x.QuestionId);
+
+            modelBuilder.Entity<Article>()
+                .HasMany(x => x.Questions)
+                .WithRequired(x => x.Article)
+                .HasForeignKey(x => x.ArticleId);
+
+            modelBuilder.Entity<AvatarImage>()
+                .HasMany(x => x.Users)
+                .WithOptional(x => x.AvatarImage)
+                .HasForeignKey(x => x.AvatarImageId);
         }
 
         #endregion
