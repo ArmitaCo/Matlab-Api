@@ -399,14 +399,14 @@ namespace Matlab.Api.Controllers
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
+            user.AddScore(ScoreReason.Register);
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
                 return new ResponseMessage(Tools.ResponseMessage.ResponseCode.AuthenticationFailed, ErrorMessages.RegisterError, result.Errors);
             }
-
+            
             return Tools.ResponseMessage.Ok;
         }
 

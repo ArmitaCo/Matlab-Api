@@ -108,7 +108,7 @@ namespace MigrateDataFromOldDbToMatlabDb
                 var answersList = questionParts.Skip(1).Select((x, y) => new Answer()
                 {
                     Title = x,
-                    ChoiceLable = (ChoiceLable)y,
+                    ChoiceLabel = (ChoiceLabel)y,
                     IsCorrect = y.ToString() == itemContent.answer,
                 }).ToList();
 
@@ -127,7 +127,7 @@ namespace MigrateDataFromOldDbToMatlabDb
                     {
                         new Question(){
                         Title = questionText,
-                        CorrectChoiceLable = (ChoiceLable)(int.Parse(itemContent.answer) - 11),
+                        CorrectChoiceLabel = (ChoiceLabel)(int.Parse(itemContent.answer) - 11),
                         Answers = answersList,
                         AnswersCount = (int)itemContent.optionCount,
                         AnswersString = answerString,
@@ -142,7 +142,7 @@ namespace MigrateDataFromOldDbToMatlabDb
 
             _matlabDb.SaveChanges();
 
-            var answers = _matlabDb.Answers.Where(x => x.Question.CorrectChoiceLable == x.ChoiceLable);
+            var answers = _matlabDb.Answers.Where(x => x.Question.CorrectChoiceLabel == x.ChoiceLabel);
             foreach (var answer in answers)
             {
                 answer.IsCorrect = true;

@@ -335,6 +335,7 @@
     <Content Include="Images\Avatars\sandy.png" />
     <Content Include="Images\Avatars\sid.png" />
     <Content Include="Images\Avatars\steve.png" />
+    <Content Include="Images\Challenges\ch1.png" />
     <Content Include="Images\Packages\25.jpg" />
     <Content Include="Images\Packages\26.jpg" />
     <Content Include="Images\Packages\27.jpg" />
@@ -362,7 +363,7 @@
     <Content Include="Images\Packages\90.jpg" />
     <Content Include="Images\Packages\90c.jpg" />
     <Content Include="Images\Packages\test.jpg" />
-    <Content Include="Images\UnsderCunstruction.gif">
+    <Content Include="Images\UC.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -18,6 +19,10 @@ namespace Matlab.DataModel
             return userIdentity;
         }
 
+        
+
+        [DefaultValue(0)]
+        public int Score { get; set; }
         public int? AvatarImageId { get; set; }
         public virtual AvatarImage AvatarImage { get; set; }
         public virtual ICollection<UserPackage> UserPackages { get; set; }
@@ -25,5 +30,7 @@ namespace Matlab.DataModel
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ICollection<ExternalArticle> ExternalArticles { get; set; }
         public virtual ICollection<UserAnswer> UserAnswers { get; set; }
+        public virtual ICollection<ScoreLog> ScoreLogs { get; set; }
+        public virtual ICollection<BugReport> BugReports { get; set; }
     }
 }

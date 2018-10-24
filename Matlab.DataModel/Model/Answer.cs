@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
@@ -11,13 +10,13 @@ namespace Matlab.DataModel
         public int Id { get; set; }
         [JsonIgnore]
         public string Title { get; set; }
-        public ChoiceLable ChoiceLable { get; set; }
+        public ChoiceLabel ChoiceLabel { get; set; }
         public bool IsCorrect { get; set; }
         public int QuestionId { get; set; }
         public virtual Question Question { get; set; }
         public virtual ICollection<UserAnswer> UserAnswers { get; set; }
         [NotMapped]
-        public string Text => labelStrings[(int)ChoiceLable]+". "+Title;
+        public string Text => labelStrings[(int)ChoiceLabel]+". "+Title;
         
     }
 
@@ -49,16 +48,4 @@ namespace Matlab.DataModel
     //    public DateTime CreateDateTime { get; set; }
 
     //}
-
-    public enum FactorStatus
-    {
-        PreSend,
-        Sended,
-        SendingError,
-        Redirected,
-        CallbackRecived,
-        CallbackRecivedWithError,
-        VerifyError,
-        Finished
-    }
 }

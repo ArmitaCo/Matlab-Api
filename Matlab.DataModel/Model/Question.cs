@@ -11,7 +11,7 @@ namespace Matlab.DataModel
         public int AnswersCount { get; set; }
         public virtual Article Article { get; set; }
         //public int CorrectAnswerId { get; set; }
-        public ChoiceLable CorrectChoiceLable { get; set; }
+        public ChoiceLabel CorrectChoiceLabel { get; set; }
         //public virtual Answer CorrectAnswer { get; set; }
         public virtual ICollection<Answer> Answers { get; set; }
         public virtual ICollection<UserAnswer> UserAnswers { get; set; }

@@ -187,6 +187,10 @@ namespace Matlab.Api.Controllers
                     DateTime = DateTime.Now,
                     UserId = userId
                 });
+
+                var user = db.Users.Find(userId);
+                var reason = answer.IsCorrect ? ScoreReason.CorrectAnswer : ScoreReason.WrongAnswer;
+                user.AddScore(reason);
                 await db.SaveChangesAsync();
 
                 if (userPackageBox.Box.Articles.SelectMany(x => x.Questions).Select(x => new QuestionMinimalViewModel(x, User.Identity.GetUserId())).All(x => x.UserAnswerId != null))
@@ -303,7 +307,7 @@ namespace Matlab.Api.Controllers
                         });
                     return Tools.ResponseMessage.OkWithMessage(ErrorMessages.ArticleLearnRepeated); //todo: review this message is correct?
                 }
-
+                db.Users.Find(userId).AddScore(ScoreReason.ArticleRead);
                 LogThis.BaseLog(Request, LogLevel.Info, Actions.ChangeBoxStateValue,
                     new Dictionary<LogProperties, object>
                     {

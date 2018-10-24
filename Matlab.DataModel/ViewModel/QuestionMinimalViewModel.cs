@@ -7,7 +7,7 @@ namespace Matlab.DataModel
     {
         public int Id { get; set; }
         public string QuestionText { get; set; }
-        public ChoiceLable CorrectAnswer { get; set; }
+        public ChoiceLabel CorrectAnswer { get; set; }
         public string AnswersText { get; set; }
         public ICollection<AnswerMinimalViewModel> Answers { get; set; }
         public int AnswersCount { get; set; }
@@ -23,7 +23,7 @@ namespace Matlab.DataModel
         {
             Id = model.Id;
             QuestionText = model.Title;
-            CorrectAnswer = model.CorrectChoiceLable;
+            CorrectAnswer = model.CorrectChoiceLabel;
             AnswersText = model.AnswersString;
             AnswersCount = model.AnswersCount;
             Answers = model.Answers.Select(x => new AnswerMinimalViewModel(x)).ToList();

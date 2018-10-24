@@ -1,6 +1,6 @@
 ﻿namespace Matlab.DataModel
 {
-    public enum ChoiceLable
+    public enum ChoiceLabel
     {
         a,
         b,

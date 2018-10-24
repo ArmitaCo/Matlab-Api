@@ -79,21 +79,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Defaults.cs" />
+    <Compile Include="ModelExtension.cs" />
     <Compile Include="Model\ApplicationUser.cs" />
     <Compile Include="MatlabDb.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Answer.cs" />
     <Compile Include="Model\Box.cs" />
+    <Compile Include="Model\BugReport.cs" />
     <Compile Include="Model\Catergory.cs" />
-    <Compile Include="Enum\ChoiceLable.cs" />
+    <Compile Include="Enum\ChoiceLabel.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\ExternalArticle.cs" />
     <Compile Include="Enum\ExternalArticleState.cs" />
+    <Compile Include="Enum\FactorStatus.cs" />
     <Compile Include="Model\Favorite.cs" />
     <Compile Include="Model\ImageSuggest.cs" />
     <Compile Include="Model\Package.cs" />
     <Compile Include="Enum\PayReson.cs" />
     <Compile Include="Model\Question.cs" />
+    <Compile Include="Enum\ScoreReason.cs" />
+    <Compile Include="Model\ScoreLog.cs" />
     <Compile Include="Model\Transaction.cs" />
     <Compile Include="Enum\UsePackageState.cs" />
     <Compile Include="Model\UserAnswer.cs" />
@@ -107,12 +112,16 @@
     <Compile Include="ViewModel\AnsweringViewModel.cs" />
     <Compile Include="ViewModel\AnswerMinimalViewModel.cs" />
     <Compile Include="ViewModel\ArticleMinimalViewModel.cs" />
+    <Compile Include="Model\Challenge.cs" />
+    <Compile Include="ViewModel\BugReportViewModel.cs" />
     <Compile Include="ViewModel\IdRequestViewModel.cs" />
     <Compile Include="ViewModel\LearningViewModel.cs" />
     <Compile Include="ViewModel\PackageMinimalViewModel.cs" />
     <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\QuestionMinimalViewModel.cs" />
     <Compile Include="ViewModel\QuestionReviewingViewModel.cs" />
+    <Compile Include="ViewModel\ScoreBoardItemViewModel.cs" />
+    <Compile Include="ViewModel\ScoreBoardViewModel.cs" />
     <Compile Include="ViewModel\SetPhotoAndExternalLinksViewModel.cs" />
     <Compile Include="ViewModel\TwoIdRequestViewModel.cs" />
     <Compile Include="ViewModel\UserBoxMinimalViewModel.cs" />
@@ -122,6 +131,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Matlab.Logger\Matlab.Logger.csproj">
+      <Project>{8B8F7914-9024-4097-80EC-B58EDC514C5B}</Project>
+      <Name>Matlab.Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

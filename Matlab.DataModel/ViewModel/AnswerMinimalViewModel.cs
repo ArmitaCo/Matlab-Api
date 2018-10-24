@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public string Text { get; set; }
         public bool IsCorrect { get; set; }
-        public ChoiceLable ChoiceLable { get; set; }
+        public ChoiceLabel ChoiceLabel { get; set; }
 
         public AnswerMinimalViewModel()
         {
@@ -17,7 +17,7 @@
             Id = model.Id;
             Text = model.Title;
             IsCorrect = model.IsCorrect;
-            ChoiceLable = model.ChoiceLable;
+            ChoiceLabel = model.ChoiceLabel;
         }
     }
 }

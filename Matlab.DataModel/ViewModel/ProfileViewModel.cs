@@ -7,6 +7,7 @@
         public string Mobile { get; set; }
         public string Email { get; set; }
         public AvatarImage AvatarImage { get; set; }
+        public int Score { get; set; }
 
         public ProfileViewModel()
         {
@@ -20,6 +21,7 @@
             AvatarImage = user.AvatarImage;
             Email = user.Email;
             Mobile ="09363505697";
+            Score = user.Score;
         }
     }
 }

@@ -20,6 +20,9 @@ namespace Matlab.DataModel
         public virtual DbSet<UserPackageBox> UserPackageBoxes { get; set; }
         public virtual DbSet<UserAnswer> UserAnswers { get; set; }
         public virtual DbSet<AvatarImage> AvatarImages { get; set; }
+        public virtual DbSet<ScoreLog> ScoreLogs { get; set; }
+        public virtual DbSet<Challenge> Challenges { get; set; }
+        public virtual DbSet<BugReport> BugReports { get; set; }
 
         #region Overrides of IdentityDbContext<ApplicationUser,IdentityRole,string,IdentityUserLogin,IdentityUserRole,IdentityUserClaim>
 
@@ -138,6 +141,16 @@ namespace Matlab.DataModel
                 .HasMany(x => x.Users)
                 .WithOptional(x => x.AvatarImage)
                 .HasForeignKey(x => x.AvatarImageId);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(x => x.ScoreLogs)
+                .WithRequired(x => x.User)
+                .HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(x => x.BugReports)
+                .WithRequired(x => x.User)
+                .HasForeignKey(x => x.UserId);
         }
 
         #endregion
