@@ -10,7 +10,7 @@ namespace Matlab.Api.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "نرم افزار مطلب";
 
             return View();
         }

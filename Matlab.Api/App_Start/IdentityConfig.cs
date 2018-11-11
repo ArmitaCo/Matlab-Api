@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Matlab.Api.Tools;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -39,6 +40,9 @@ namespace Matlab.Api
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+			manager.SmsService=new SmsService();
+	        
+
             return manager;
         }
     }

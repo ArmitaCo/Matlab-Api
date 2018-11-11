@@ -162,4 +162,16 @@
   <data name="SetAvatarRequested" xml:space="preserve">
     <value>تغییر نماد کاربر</value>
   </data>
+  <data name="BugReported" xml:space="preserve">
+    <value>ارسال گزارش خرابی</value>
+  </data>
+  <data name="LeaderBoardRequested" xml:space="preserve">
+    <value>دریافت لیست قهرمانان</value>
+  </data>
+  <data name="ProfileImageListRequested" xml:space="preserve">
+    <value>دریافت لیست آواتار</value>
+  </data>
+  <data name="VerifyPhoneCodeRequested" xml:space="preserve">
+    <value>تایید کد موبایل</value>
+  </data>
 </root>

@@ -70,6 +70,15 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ارسال گزارش خرابی.
+        /// </summary>
+        internal static string BugReported {
+            get {
+                return ResourceManager.GetString("BugReported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to دریافت دسته بندی ها.
         /// </summary>
         internal static string CategoriesRequested {
@@ -93,6 +102,15 @@ namespace Matlab.Api.Tools {
         internal static string ChangeBoxStateValue {
             get {
                 return ResourceManager.GetString("ChangeBoxStateValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دریافت لیست قهرمانان.
+        /// </summary>
+        internal static string LeaderBoardRequested {
+            get {
+                return ResourceManager.GetString("LeaderBoardRequested", resourceCulture);
             }
         }
         
@@ -138,6 +156,15 @@ namespace Matlab.Api.Tools {
         internal static string ProfileDataRequested {
             get {
                 return ResourceManager.GetString("ProfileDataRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دریافت لیست آواتار.
+        /// </summary>
+        internal static string ProfileImageListRequested {
+            get {
+                return ResourceManager.GetString("ProfileImageListRequested", resourceCulture);
             }
         }
         
@@ -192,6 +219,15 @@ namespace Matlab.Api.Tools {
         internal static string UserPackageBoxQuestionsRequested {
             get {
                 return ResourceManager.GetString("UserPackageBoxQuestionsRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تایید کد موبایل.
+        /// </summary>
+        internal static string VerifyPhoneCodeRequested {
+            get {
+                return ResourceManager.GetString("VerifyPhoneCodeRequested", resourceCulture);
             }
         }
     }

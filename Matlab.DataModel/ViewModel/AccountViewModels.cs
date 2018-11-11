@@ -40,4 +40,10 @@ namespace Matlab.DataModel
 
         public string ProviderKey { get; set; }
     }
+
+	public class UserVerifyPhoneCodeViewModel
+	{
+		public string Code { get; set; }
+		public string PhoneNumber { get; set; }
+	}
 }

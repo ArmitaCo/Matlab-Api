@@ -37,6 +37,7 @@ namespace Matlab.DataModel
         [Required]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
@@ -49,6 +50,17 @@ namespace Matlab.DataModel
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+	    [Required]
+	    [Display(Name = "First Name")]
+		public string FirstName { get; set; }
+	    [Required]
+	    [Display(Name = "Last Name")]
+		public string LastName { get; set; }
+	    [Required]
+		[DataType(DataType.PhoneNumber)]
+        [Phone]
+		public string Mobile { get; set; }
     }
 
     public class RegisterExternalBindingModel
@@ -56,6 +68,7 @@ namespace Matlab.DataModel
         [Required]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
     }
 

@@ -385,6 +385,15 @@ namespace Matlab.Api.Tools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کد ارسالی اشتباه است.
+        /// </summary>
+        internal static string VerificationCodeInvalid {
+            get {
+                return ResourceManager.GetString("VerificationCodeInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to پاسخ کاربر غلط بود.
         /// </summary>
         internal static string WrongAnswer {

@@ -228,4 +228,7 @@
   <data name="AvatarImageNotFound" xml:space="preserve">
     <value>نماد یافت نشد</value>
   </data>
+  <data name="VerificationCodeInvalid" xml:space="preserve">
+    <value>کد ارسالی اشتباه است</value>
+  </data>
 </root>

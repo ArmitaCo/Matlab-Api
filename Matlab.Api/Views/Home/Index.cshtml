@@ -1,34 +1,243 @@
 ﻿
-<div class="jumbotron">
-  @Html.ActionLink("افزودن عکس پیشنهادی", "AddImage", "Article", null, new { @class = "btn btn-block btn-primary btn-lg" })
-  @Html.ActionLink("انتخاب عکس", "SetImage", "Article", null, new { @class = "btn btn-block btn-primary btn-lg" })
-  @Html.ActionLink("افزودن جستار پیشنهادی", "AddExternalLink", "ExternalArticle", null, new { @class = "btn btn-block btn-primary btn-lg" })
-  @Html.ActionLink("بررسی جستارهای پیشنهادی", "SetExternalLink", "ExternalArticle", null, new { @class = "btn btn-block btn-primary btn-lg" })
-  @Html.ActionLink("افزودن و عکس جستار پیشنهادی", "AddImageAndExternalLink", "Article", null, new { @class = "btn btn-block btn-primary btn-lg" })
-  @Html.ActionLink("بررسی عکس و جستارهای پیشنهادی", "SetImageAndExternalLink", "Article", null, new { @class = "btn btn-block btn-primary btn-lg" })
-  <h1>ASP.NET</h1>
-  <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-  <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <h2>Getting started</h2>
-    <p>
-      ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-      a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-      is an ideal platform for building RESTful applications on the .NET Framework.
-    </p>
-    <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+@{
+    /**/
 
-  </div>
-  <div class="col-md-4">
-    <h2>Get more libraries</h2>
-    <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-    <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-  </div>
-  <div class="col-md-4">
-    <h2>Web Hosting</h2>
-    <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-    <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-  </div>
-</div>
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>نرم افزار مطلب</title>
+
+    <!-- Bootstrap core CSS -->
+    @* <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">    *@
+    @Styles.Render("~/Content/css2")
+
+
+    <!-- Custom fonts for this template -->
+    @* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"> *@
+    @* <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css"> *@
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="~/device-mockups/device-mockups.min.css">
+
+    <!-- Custom styles for this template -->
+    @* <link href="css/new-age.min.css" rel="stylesheet"> *@
+    @Styles.Render("~/Content/new-age")
+</head>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">نرم افزار مطلب</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#download">دانلود</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#features">ویژگی ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">تماس با ما</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-7 my-auto">
+                    <div class="header-content mx-auto">
+                        <h1 class="mb-5">با نرم افزار ما میتوانید مسائل بهداشتی مورد علاقه خودتان را در حد یک متخصص یاد بگیرید!</h1>
+                        <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">همین حالا شروع کنید</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 my-auto">
+                    <div class="device-container">
+                        <div class="device-mockup iphone6_plus portrait white">
+                            <div class="device">
+                                <div class="screen">
+                                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                    <img src="~/img/demo-screen-1.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="button">
+                                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="download bg-primary text-center" id="download">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h2 class="section-heading">با ما همراه شوید تا بیشتر بدانید!</h2>
+                    <p>بزودی علاوه بر نسخه اندروید، نسخه IOS و وب هم منتشر خواهد شد</p>
+                    <div class="badges">
+                        <a class="badge-link" href="~/Download/matlab.apk" ><img src="~/img/direct-download.png" alt=""></a>
+                        <a class="badge-link" href="http://cafebazaar.ir/app/?id=amirhossein.torkan.zakeroon&ref=share"><img src="~/img/bazaar.svg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h2>امکانات یادگیری از ما، مطالعه از شما</h2>
+                <p class="text-muted">شما می توانید علاوه بر یادگیری، برنده شوید</p>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 my-auto">
+                    <div class="device-container">
+                        <div class="device-mockup iphone6_plus portrait white">
+                            <div class="device">
+                                <div class="screen">
+                                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                    <img src="~/img/demo-screen-1.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="button">
+                                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 my-auto">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="feature-item">
+                                    <i class="fa fa-black-tie text-primary"></i>
+                                    <h3>مطالب اصیل</h3>
+                                    <p class="text-muted">ما با کمک تیم پزشکان خود مطالبی اصیل، یکپارچه و درخور شأن شما محیا کرده ایم</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="feature-item">
+                                    <i class="fa fa-chain text-primary"></i>
+                                    <h3>سیر مطالعاتی</h3>
+                                    <p class="text-muted">مطالب ما طوری گرد آوری شده است که میتوانید بدون هیچ پیش نیازی شروع به فراگیری کنید</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="feature-item">
+                                    <i class="fa fa-question text-primary"></i>
+                                    <h3>آزمون</h3>
+                                    <p class="text-muted">برای یادگیری بهتر میتوانید به سوالات مربوطه پاسخ دهید، این یکی از بهترین روش های آموزشی دنیاست</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="feature-item">
+                                    <i class="fa fa-diamond text-primary"></i>
+                                    <h3>مسابقه</h3>
+                                    <p class="text-muted">مطالعه کنید، آزمون دهید و هر ماه در قرعه کشی شرکت کنید</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <div class="container">
+                <h2>مطالعه کنید.<br>برنده شوید.</h2>
+                <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">همین حالا شروع کنید!</a>
+            </div>
+        </div>
+        <div class="overlay"></div>
+    </section>
+
+    <section class="contact bg-primary" id="contact">
+        <div class="container  ">
+            <h2 class="text-center">
+                دوستانمان را
+                <i class="fa fa-heart"></i>
+                داریم!
+            </h2>
+            <ul class="list-inline list-social text-center">
+                <li class="list-inline-item social-twitter">
+                    <a href="#" class="text-center">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item social-facebook">
+                    <a href="#" class="text-center">
+                        <i class="fa fa-telegram"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item social-google-plus">
+                    <a href="#" class="text-center">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container ">
+            <p class="text-center">&copy; تمامی حقوق مادی و معنوی این وبسایت به شرکت پایدار ارتباط آرمیتا تعلق دارد</p>
+            @* <ul class="list-inline"> *@
+            @*     <li class="list-inline-item"> *@
+            @*         <a href="#">Privacy</a> *@
+            @*     </li> *@
+            @*     <li class="list-inline-item"> *@
+            @*         <a href="#">Terms</a> *@
+            @*     </li> *@
+            @*     <li class="list-inline-item"> *@
+            @*         <a href="#">FAQ</a> *@
+            @*     </li> *@
+            @* </ul> *@
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery-easing")
+
+    @Scripts.Render("~/bundles/new-age")
+
+    <!-- Bootstrap core JavaScript -->
+    @* <script src="vendor/jquery/jquery.min.js"></script> *@
+    @* <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> *@
+
+    <!-- Plugin JavaScript -->
+    @* <script src="vendor/jquery-easing/jquery.easing.min.js"></script> *@
+
+    <!-- Custom scripts for this template -->
+    @* <script src="js/new-age.min.js"></script> *@
+
+</body>
+
+</html>
